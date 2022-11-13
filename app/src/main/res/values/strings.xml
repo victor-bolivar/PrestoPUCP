@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PrestoPUCP</string>
+
+    <string-array name="roles">
+        <item>Alumno</item>
+        <item>Docente</item>
+        <item>Administrativo</item>
+    </string-array>
 </resources>

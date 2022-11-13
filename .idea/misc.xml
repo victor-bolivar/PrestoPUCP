@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/activity_inicio.xml" value="0.20108695652173914" />
+        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/drawable/boz.xml" value="0.1" />
+        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/drawable/line.xml" value="0.236" />
+        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/activity_inicio.xml" value="0.2" />
+        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/activity_main.xml" value="0.20108695652173914" />
-        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/activity_usuario_ti_solicitudes_pendientes.xml" value="0.536" />
+        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/activity_register.xml" value="0.4" />
+        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/activity_usuario_ti_agregar_dispositivo.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/activity_usuario_ti_solicitudes_pendientes.xml" value="0.4" />
       </map>
     </option>
   </component>

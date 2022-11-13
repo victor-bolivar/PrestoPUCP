@@ -4,196 +4,206 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:foregroundTint="#F6F2F2"
     tools:context=".UsuarioTI_SolicitudesPendientes">
 
-    <TextView
-        android:id="@+id/textView_detallesAdicionales"
-        android:layout_width="288dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="8dp"
-        android:text="tkm gareca"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-    <View
-        android:layout_width=" 288dp"
-        android:layout_height="0.5dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="16dp"
-        android:background="#000000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_numeroSolicitud" />
-
-    <TextView
-        android:id="@+id/textView15"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="16dp"
-        android:text="detalles adicionales"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_programas" />
+        android:layout_marginTop="535dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#920011"
+        android:clickable="true"
+        android:onClick="logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_crosswhite" />
 
-    <TextView
-        android:id="@+id/textView_programas"
-        android:layout_width="288dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="8dp"
-        android:text="FIFA22, Autocad, Word"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-    <TextView
-        android:id="@+id/textView14"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="16dp"
-        android:text="programas que necesita tener instalado"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_tiempoReserva" />
+        android:layout_marginTop="608dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#7D96CC"
+        android:clickable="true"
+        android:tint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_checkwhite" />
 
-    <TextView
-        android:id="@+id/textView_tiempoReserva"
-        android:layout_width="288dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="8dp"
-        android:text="30 dias"
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foregroundTint="#FFFEFE"
+        android:paddingBottom="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="16dp"
-        android:text="tiempo de reserva"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_motivo" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            android:paddingBottom="8dp">
 
-    <TextView
-        android:id="@+id/textView_motivo"
-        android:layout_width="288dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="8dp"
-        android:text="Rompi mi laptop cuando valera se falló el penal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            <TextView
+                android:id="@+id/textView_numeroSolicitud"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="32dp"
+                android:text="Solicitud #1"
+                android:textAllCaps="false"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="16dp"
-        android:text="motivo"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_curso2" />
+            <View
+                android:layout_width=" 288dp"
+                android:layout_height="0.5dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="16dp"
+                android:background="#000000" />
 
-    <TextView
-        android:id="@+id/textView_curso2"
-        android:layout_width="288dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="4dp"
-        android:text="Análisis de la campaña de alianza"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="37dp"
+                android:text="alumno"
+                android:textSize="12sp" />
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="16dp"
-        android:text="curso"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_dni" />
+            <TextView
+                android:id="@+id/textView_nombre"
+                android:layout_width="288dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="4dp"
+                android:text="Lionel Messi" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="16dp"
-        android:text="dni"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_codigo" />
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="16dp"
+                android:text="código"
+                android:textSize="12sp" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="16dp"
-        android:text="código"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_alumno" />
+            <TextView
+                android:id="@+id/textView_codigo"
+                android:layout_width="288dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="8dp"
+                android:text="20180231" />
 
-    <TextView
-        android:id="@+id/textView_codigo"
-        android:layout_width="288dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="8dp"
-        android:text="20180231"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="16dp"
+                android:text="dni"
+                android:textSize="12sp" />
 
-    <TextView
-        android:id="@+id/textView_numeroSolicitud"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="48dp"
-        android:text="Solicitud #1"
-        android:textAllCaps="false"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/imageView_dni"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="16dp"
+                app:srcCompat="@drawable/dni_ejemplo" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="37dp"
-        android:text="alumno"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_numeroSolicitud" />
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="16dp"
+                android:text="curso"
+                android:textSize="12sp" />
 
-    <TextView
-        android:id="@+id/textView_alumno"
-        android:layout_width="288dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="4dp"
-        android:text="Lionel Messi"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            <TextView
+                android:id="@+id/textView_curso2"
+                android:layout_width="288dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="4dp"
+                android:text="Análisis de la campaña de alianza" />
 
-    <ImageView
-        android:id="@+id/imageView_dni"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:srcCompat="@drawable/dni_ejemplo" />
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="16dp"
+                android:text="motivo"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textView_motivo"
+                android:layout_width="288dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="8dp"
+                android:text="Rompi mi laptop cuando valera se falló el penal" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="16dp"
+                android:text="tiempo de reserva"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textView_tiempoReserva"
+                android:layout_width="288dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="8dp"
+                android:text="30 dias" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="16dp"
+                android:text="programas que necesita tener instalado"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textView_programas"
+                android:layout_width="288dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="8dp"
+                android:text="FIFA22, Autocad, Word" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="16dp"
+                android:text="detalles adicionales"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textView_detallesAdicionales"
+                android:layout_width="288dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="8dp"
+                android:text="tkm gareca" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

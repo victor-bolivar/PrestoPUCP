@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1053158880395",
+    "firebase_url": "https://prestopucp-default-rtdb.firebaseio.com",
+    "project_id": "prestopucp",
+    "storage_bucket": "prestopucp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053158880395:android:1311857960ecc45136908e",
+        "android_client_info": {
+          "package_name": "com.example.prestopucp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053158880395-6ih42gjqfrjf7h8899ckmjj5jlts7sbk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJFyI7tfTVHgxxwFO5tqvzib2cRnvmyiM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053158880395-6ih42gjqfrjf7h8899ckmjj5jlts7sbk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
