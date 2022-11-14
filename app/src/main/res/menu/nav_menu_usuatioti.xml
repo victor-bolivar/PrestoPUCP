@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_micuenta"
+        android:title="Mi cuenta"
+        android:icon="@drawable/ic_baseline_account_circle_24"/>
+
+    <item android:id="@+id/nav_solicitudespendientes"
+        android:title="Solicitudes pendientes"
+        android:icon="@drawable/ic_calendar"/>
+
+    <item android:id="@+id/nav_gestiondispositivos"
+        android:title="Gestion de dispositivos"
+        android:icon="@drawable/ic_computer"/>
+
+</menu>

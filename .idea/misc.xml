@@ -9,8 +9,15 @@
         <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/activity_main.xml" value="0.20108695652173914" />
         <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/activity_register.xml" value="0.4" />
+        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/activity_usuario_ti.xml" value="0.1" />
         <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/activity_usuario_ti_agregar_dispositivo.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/activity_usuario_ti_solicitudes_pendientes.xml" value="0.4" />
+        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/fragment_solicitudes_pendientes.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/fragment_uti_gestiondispositivos.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/fragment_uti_micuenta.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/fragment_uti_solicitudespendientes.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/nav_header_usuarioti.xml" value="0.536" />
+        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/menu/nav_menu_usuatioti.xml" value="0.253125" />
       </map>
     </option>
   </component>

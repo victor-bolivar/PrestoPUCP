@@ -55,8 +55,8 @@ public class Inicio extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
 
         // SE VERIFICA QUE SI ESTA LOGUEADO -> actividad solicitudes pendientes
         if (mAuth.getCurrentUser() != null){
@@ -78,7 +78,7 @@ public class Inicio extends AppCompatActivity {
 
                         switch(privilegio){
                             case "UsuarioTI":
-                                Intent intent = new Intent(Inicio.this, UsuarioTI_SolicitudesPendientes.class);
+                                Intent intent = new Intent(Inicio.this, UsuarioTI.class);
                                 startActivity( intent );
                                 break;
 
