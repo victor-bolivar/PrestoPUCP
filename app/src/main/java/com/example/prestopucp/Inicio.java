@@ -61,8 +61,7 @@ public class Inicio extends AppCompatActivity {
         // SE VERIFICA QUE SI ESTA LOGUEADO -> actividad solicitudes pendientes
         if (mAuth.getCurrentUser() != null){
             FirebaseUser currentUser = mAuth.getCurrentUser();
-            Log.d("msg / i usuario logeado", mAuth.getCurrentUser().getUid()
-            );
+            Log.d("msg / i usuario logeado", mAuth.getCurrentUser().getUid());
 
             mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
