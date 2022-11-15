@@ -1,5 +1,6 @@
 package com.example.prestopucp.usuarioti;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,9 +13,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.prestopucp.R;
 import com.example.prestopucp.dto.Dispositivo;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -103,6 +106,16 @@ public class uti_gestiondispositivos extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        // listener para el boton de agregar dispositivos
+        FloatingActionButton btn_agregardispositivo = view.findViewById(R.id.uti_gestiondispositivos_btnAdd);
+        btn_agregardispositivo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), uti_agegardispositivo.class);
+                startActivity(intent);
             }
         });
 

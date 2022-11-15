@@ -7,6 +7,14 @@
         <item>Administrativo</item>
     </string-array>
 
+    <string-array name="tipoDispositivos">
+        <item>Laptop</item>
+        <item>Tableta</item>
+        <item>Celular</item>
+        <item>Monitor</item>
+        <item>Otro</item>
+    </string-array>
+
     <string name="open_drawer">Open</string>
     <string name="close_drawer">Close</string>
 
