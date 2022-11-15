@@ -81,7 +81,7 @@ public class Register extends AppCompatActivity {
                             // 3. si se crea satifactoriamente, se guarda la info en la real time database
                             if (task.isSuccessful()){
 
-                                User user = new User(nombre,  codigo,  email,  rol, "Cliente");
+                                User user = new User(nombre,  codigo,  email,  rol, "Cliente", "");
                                 FirebaseDatabase.getInstance().getReference("users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -37,8 +37,7 @@
         android:layout_width="288dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="292dp"
-        android:text="Lionel Messi" />
+        android:layout_marginTop="292dp" />
 
     <TextView
         android:id="@+id/textView2_uti_micuenta"
@@ -54,8 +53,7 @@
         android:layout_width="288dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="340dp"
-        android:text="20180231" />
+        android:layout_marginTop="340dp" />
 
     <TextView
         android:id="@+id/textView3_uti_micuenta"
@@ -71,8 +69,7 @@
         android:layout_width="288dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="388dp"
-        android:text="victor.bolivar@pucp.edu.pe" />
+        android:layout_marginTop="388dp" />
 
     <TextView
         android:id="@+id/textView4_uti_micuenta"
@@ -92,7 +89,7 @@
         android:text="Usuario TI" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

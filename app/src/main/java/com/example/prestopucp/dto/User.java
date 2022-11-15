@@ -6,6 +6,7 @@ public class User {
     public String email;
     public String rol;
     public String privilegio;
+    public String imagenUrl;
 
     public User(){
     }
@@ -16,5 +17,14 @@ public class User {
         this.email = email;
         this.rol = rol;
         this.privilegio = privilegio;
+    }
+
+    public User(String nombre, String codigo, String email, String rol, String privilegio, String imagenUrl) {
+        this.nombre = nombre;
+        this.codigo = codigo;
+        this.email = email;
+        this.rol = rol;
+        this.privilegio = privilegio;
+        this.imagenUrl = imagenUrl;
     }
 }
