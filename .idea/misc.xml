@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/drawable/box.xml" value="0.229" />
         <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/drawable/boz.xml" value="0.1" />
         <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/drawable/line.xml" value="0.236" />
         <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/activity_inicio.xml" value="0.2" />
@@ -17,6 +18,7 @@
         <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/fragment_uti_micuenta.xml" value="0.33" />
         <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/fragment_uti_solicitudespendientes.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/nav_header_usuarioti.xml" value="0.536" />
+        <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/uti_itemdispositivo.xml" value="0.5" />
         <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/menu/nav_menu_usuatioti.xml" value="0.253125" />
       </map>
     </option>
