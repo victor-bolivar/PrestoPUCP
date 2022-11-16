@@ -30,6 +30,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -51,6 +52,8 @@ public class uti_editardispositivo extends AppCompatActivity {
 
     private int numeroImagenesSeleccionadas;
     private ArrayList<String> listaUrlImagenes = new ArrayList<String>();
+
+    private Boolean seModificaronImagenes = false;
 
     private Dispositivo dispositivo;
 
@@ -167,24 +170,6 @@ public class uti_editardispositivo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(numeroImagenesSeleccionadas < 3){
-                    // alert dialog para indicar al usuario que ingrese 3 imagenes como minimo
-                    AlertDialog.Builder alertdialogBuilder = new AlertDialog.Builder(uti_editardispositivo.this);
-                    alertdialogBuilder.setMessage("Por favor, seleccionar 3 imagenes como minimo.");
-                    alertdialogBuilder.setCancelable(true);
-                    alertdialogBuilder.setPositiveButton(
-                            "Aceptar",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            });
-                    AlertDialog alert11 = alertdialogBuilder.create();
-                    alert11.show();
-
-                    return;
-                }
-
                 Spinner spinnnerTipo = findViewById(R.id.uti_editardispositivo_spinnertipo);
                 EditText editText_especificarTipo = findViewById(R.id.uti_editardispositivo_especificartipo);
                 String tipo = spinnnerTipo.getSelectedItem().toString();
@@ -207,72 +192,168 @@ public class uti_editardispositivo extends AppCompatActivity {
 
                 progressDialog.show();
 
-                // borrado de las imagenes anteriores en base al URL
-                for(String urlImagenAntigua : dispositivo.getImagenes()){
-                    StorageReference photoRef = FirebaseStorage.getInstance().getReferenceFromUrl(urlImagenAntigua);
-                    photoRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            // File deleted successfully
-                            Log.d("msg / eliminarimagen", "onSuccess: deleted file");
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // Uh-oh, an error occurred!
-                            Log.d("msg / eliminarimagen", "onFailure: did not delete file");
-                        }
-                    });
-                }
+                if (seModificaronImagenes){
+                    if(numeroImagenesSeleccionadas < 3){
+                        // alert dialog para indicar al usuario que ingrese 3 imagenes como minimo
+                        AlertDialog.Builder alertdialogBuilder = new AlertDialog.Builder(uti_editardispositivo.this);
+                        alertdialogBuilder.setMessage("Por favor, seleccionar 3 imagenes como minimo.");
+                        alertdialogBuilder.setCancelable(true);
+                        alertdialogBuilder.setPositiveButton(
+                                "Aceptar",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        AlertDialog alert11 = alertdialogBuilder.create();
+                        alert11.show();
 
+                        return;
+                    }
 
-                // guardado de las nuevas imagenes
-                StorageReference imageFolder = FirebaseStorage.getInstance().getReference().child("dispositivos");
-                for (uploadCount = 0; uploadCount < imageList.size(); uploadCount++) {
+                    // borrado de las imagenes anteriores en base al URL
+                    for(String urlImagenAntigua : dispositivo.getImagenes()){
+                        StorageReference photoRef = FirebaseStorage.getInstance().getReferenceFromUrl(urlImagenAntigua);
+                        photoRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                // File deleted successfully
+                                Log.d("msg / eliminarimagen", "onSuccess: deleted file");
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Uh-oh, an error occurred!
+                                Log.d("msg / eliminarimagen", "onFailure: did not delete file");
+                            }
+                        });
+                    }
 
-                    Uri individualImage = imageList.get(uploadCount);
-                    StorageReference imageName = imageFolder.child(tipo + "-" + marca + "-" + individualImage.getLastPathSegment()); // nombre a guardar en Fire Storage
-                    String finalTipo = tipo; // vainas del compilador
-                    String finalKey = dispositivo.getKey();
-                    Log.d("msg / key", finalKey);
+                    // guardado de las nuevas imagenes
+                    StorageReference imageFolder = FirebaseStorage.getInstance().getReference().child("dispositivos");
+                    for (uploadCount = 0; uploadCount < imageList.size(); uploadCount++) {
 
-                    imageName.putFile(individualImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Uri individualImage = imageList.get(uploadCount);
+                        StorageReference imageName = imageFolder.child(tipo + "-" + marca + "-" + individualImage.getLastPathSegment()); // nombre a guardar en Fire Storage
+                        String finalTipo = tipo; // vainas del compilador
+                        String finalKey = dispositivo.getKey(); // vainas del compilador
 
-                            imageName.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    String downloadUrl = uri.toString();
-                                    listaUrlImagenes.add(downloadUrl);
+                        imageName.putFile(individualImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                                    if (listaUrlImagenes.size() == imageList.size()){
-                                        // si es la ultima imagen, se guarda la info en RelTime Database
+                                imageName.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        String downloadUrl = uri.toString();
+                                        listaUrlImagenes.add(downloadUrl);
+
+                                        if (listaUrlImagenes.size() == imageList.size()){
+                                            // si es la ultima imagen, se guarda la info en RelTime Database
 
 //                                        String key = dispositivo.getKey(); // KEY DEL ACTUAL DISPOSITIVO QUE SE ESTA EDITANDO
-                                        Dispositivo dispositivo = new Dispositivo(finalTipo, listaUrlImagenes, marca, stock, caracteristicas, incluye, finalKey);
+                                            Dispositivo dispositivo = new Dispositivo(finalTipo, listaUrlImagenes, marca, stock, caracteristicas, incluye, finalKey);
 
-                                        FirebaseDatabase.getInstance().getReference("dispositivos").child(finalKey).setValue(dispositivo).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                Log.d("msg / realtimedatabase", "se actualizo la info del dispositivo con la URL");
+                                            FirebaseDatabase.getInstance().getReference("dispositivos").child(finalKey).setValue(dispositivo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    Log.d("msg / realtimedatabase", "se actualizo la info del dispositivo con la URL");
 
-                                            }
-                                        });
+                                                }
+                                            });
 
-                                        progressDialog.dismiss();
-                                        finish();
+                                            progressDialog.dismiss();
+                                            finish();
 
+                                        }
                                     }
-                                }
-                            });
+                                });
+
+                            }
+                        });
+                    }
+                }
+                else{
+                    // se mantiene las fotos antiguas
+
+                    Dispositivo nuevoDispositivo = new Dispositivo(tipo, dispositivo.getImagenes(), marca, stock, caracteristicas, incluye, dispositivo.getKey());
+
+                    FirebaseDatabase.getInstance().getReference("dispositivos").child(dispositivo.getKey()).setValue(nuevoDispositivo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Log.d("msg / realtimedatabase", "se actualizo la info del dispositivo con la URL");
 
                         }
                     });
+
+                    progressDialog.dismiss();
+                    finish();
                 }
+
+
+
+            }
+        });
+
+        // FUNCIONALIDAD: BORRAR DISPOSITIVO
+        Button button_eliminarDispositivo = findViewById(R.id.uti_editardispositivo_btnEliminarDispositivo);
+        button_eliminarDispositivo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(uti_editardispositivo.this);
+                builder1.setMessage("¿Està seguro que desea eliminar este dispositivo? No podrà recuperar esta informaciòn.");
+                builder1.setCancelable(true);
+                builder1.setPositiveButton(
+                        "Si",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+
+                                // borrado de las imagenes en base al URL
+                                for(String urlImagenAntigua : dispositivo.getImagenes()){
+                                    StorageReference photoRef = FirebaseStorage.getInstance().getReferenceFromUrl(urlImagenAntigua);
+                                    photoRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            // File deleted successfully
+                                            Log.d("msg / eliminarimagen", "onSuccess: deleted file");
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception exception) {
+                                            // Uh-oh, an error occurred!
+                                            Log.d("msg / eliminarimagen", "onFailure: did not delete file");
+                                        }
+                                    });
+                                }
+
+                                // borrado de la data en realtime database
+                                FirebaseDatabase.getInstance().getReference("dispositivos").child(dispositivo.getKey()).removeValue();
+
+                                // se cierra el activity
+                                finish();
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
+
+
+
             }
         });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -305,6 +386,9 @@ public class uti_editardispositivo extends AppCompatActivity {
                         imageList.add(imageUri);
                         currentImageSelect++;
                     }
+
+                    // se indica que se modificaron las imagenes
+                    seModificaronImagenes = true;
 
 
                 }

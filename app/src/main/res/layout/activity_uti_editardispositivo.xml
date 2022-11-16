@@ -182,8 +182,19 @@
                 android:layout_marginStart="48dp"
                 android:layout_marginTop="18dp"
                 android:layout_marginEnd="48dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="0dp"
                 android:text="Guardar cambios" />
+
+            <Button
+                android:id="@+id/uti_editardispositivo_btnEliminarDispositivo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="48dp"
+                android:layout_marginBottom="30dp"
+                android:backgroundTint="#7A2E2E"
+                android:text="Eliminar dispositivo" />
 
         </LinearLayout>
     </ScrollView>
