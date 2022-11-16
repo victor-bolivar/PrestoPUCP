@@ -15,12 +15,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.prestopucp.R;
 import com.example.prestopucp.dto.Dispositivo;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -38,6 +40,8 @@ public class uti_editardispositivo extends AppCompatActivity {
     private int numeroImagenesSeleccionadas;
     private ArrayList<String> listaUrlImagenes = new ArrayList<String>();
 
+    private Dispositivo dispositivo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +54,7 @@ public class uti_editardispositivo extends AppCompatActivity {
 
         // se obtienen los datos del dispositivo a editar
         Intent intent = getIntent();
-        Dispositivo dispositivo = (Dispositivo) intent.getSerializableExtra("dispositivo");
+        dispositivo = (Dispositivo) intent.getSerializableExtra("dispositivo");
 
         EditText editText_marca = findViewById(R.id.uti_editardispositivo_marca);
         EditText editText_caracteristicas = findViewById(R.id.uti_editardispositivo_caracteristicas);
@@ -109,7 +113,25 @@ public class uti_editardispositivo extends AppCompatActivity {
             }
         });
 
-        // TODO mostrar imagenes actuales
+        // mostrar imagenes actuales
+        LinearLayout linearLayout = findViewById(R.id.uti_editardispositivo_linearlayout);
+
+        for (String imagenUrl : dispositivo.getImagenes()){
+            //ImageView Setup
+            ImageView imageView = new ImageView(this);
+            //setting image resource
+            imageView.setImageResource(R.drawable.imagen_ejemplo_dispositivo);
+            //setting image position
+            imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, convertirDpPixel(300)));
+            //adding view to layout
+            linearLayout.addView(imageView);
+
+            Picasso.with(this)
+                    .load(imagenUrl)
+                    .resize(0, convertirDpPixel(300))
+                    .into(imageView);
+        }
+
 
         // TODO copiar y pegar funcionalidad para seleecionar nuevas imagenes
         // TODO borrar imagenes actuales de firestorage en base a su url / https://stackoverflow.com/questions/42930619/how-to-delete-image-from-firebase-storage

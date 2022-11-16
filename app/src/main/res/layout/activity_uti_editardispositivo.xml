@@ -142,7 +142,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:layout_marginTop="16dp"
-                android:text="imagenes (seleccionar 3 como minimo)" />
+                android:text="imagenes " />
+
+            <LinearLayout
+                android:id="@+id/uti_editardispositivo_linearlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="48dp"
+                android:orientation="vertical"></LinearLayout>
 
             <TextView
                 android:id="@+id/uti_editardispositivo_numeroimagenes"
@@ -151,7 +161,7 @@
                 android:layout_marginStart="48dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="48dp"
-                android:text="Ninguna imagen seleccionada"
+                android:text="Ninguna imagen nueva seleccionada"
                 android:textStyle="italic" />
 
             <Button
@@ -162,7 +172,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="48dp"
                 android:backgroundTint="#494C5A"
-                android:text="Seleccionar imagenes"
+                android:text="Seleccionar nuevas imagenes"
                 android:textColorLink="#CC5E5E" />
 
             <Button
