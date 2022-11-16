@@ -93,7 +93,7 @@ public class uti_agegardispositivo extends AppCompatActivity {
             }
         });
 
-        // para la funcionalidad de subir multiples imagenes
+        // para la funcionalidad de seleccionar multiples imagenes
         btn_agregarDispositivo = findViewById(R.id.uti_agregardispositivo_btnCrearDispositivo);
         btn_seleccionarImagenes = findViewById(R.id.uti_agregardispositivo_btnseleccionar);
         textView_numeroImagenesSeleccionadas = findViewById(R.id.uti_agregardispositivo_numeroimagenes);

@@ -96,6 +96,7 @@ public class uti_gestiondispositivos extends Fragment {
                             String incluye = dispositivoSnapshot.child("incluye").getValue().toString();
                             int stock = Integer.parseInt(dispositivoSnapshot.child("stock").getValue().toString());
                             String tipo = dispositivoSnapshot.child("tipo").getValue().toString();
+                            String key = dispositivoSnapshot.child("key").getValue().toString();
 
                             ArrayList<String> listaImagenes = new ArrayList<String>();
                             for (DataSnapshot imagenSnapshot : dispositivoSnapshot.child("imagenes").getChildren()){
@@ -105,7 +106,7 @@ public class uti_gestiondispositivos extends Fragment {
                             }
 
                             // se agrega el nuevo dispositivo
-                            arraylistDispositivos.add(new Dispositivo(tipo, listaImagenes, marca, stock, caracteristicas, incluye));
+                            arraylistDispositivos.add(new Dispositivo(tipo, listaImagenes, marca, stock, caracteristicas, incluye, key));
 
                         }
                     }

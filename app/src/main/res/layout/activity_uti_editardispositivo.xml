@@ -176,7 +176,7 @@
                 android:textColorLink="#CC5E5E" />
 
             <Button
-                android:id="@+id/uti_editardispositivo_btnCrearDispositivo"
+                android:id="@+id/uti_editardispositivo_btnEditarDispositivo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
