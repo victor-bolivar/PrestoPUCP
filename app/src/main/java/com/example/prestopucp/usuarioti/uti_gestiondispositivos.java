@@ -33,6 +33,8 @@ public class uti_gestiondispositivos extends Fragment {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
+    RecyclerView recyclerView;
+
     public uti_gestiondispositivos() {
         super(R.layout.fragment_uti_gestiondispositivos);
     }
@@ -51,6 +53,26 @@ public class uti_gestiondispositivos extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
+
+        // recycler view binding
+        recyclerView = view.findViewById(R.id.uti_dispositivos_recyclerView);
+
+        // listener para el boton de agregar dispositivos
+        FloatingActionButton btn_agregardispositivo = view.findViewById(R.id.uti_gestiondispositivos_btnAdd);
+        btn_agregardispositivo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), uti_agegardispositivo.class);
+                startActivity(intent);
+            }
+        });
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
 
         // se obtienen los datos
 
@@ -98,7 +120,6 @@ public class uti_gestiondispositivos extends Fragment {
                     adapter.setContext(getActivity());
 
                     // se asigna el adapter al recyclerview
-                    RecyclerView recyclerView = view.findViewById(R.id.uti_dispositivos_recyclerView);
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 }
@@ -108,17 +129,5 @@ public class uti_gestiondispositivos extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
-        // listener para el boton de agregar dispositivos
-        FloatingActionButton btn_agregardispositivo = view.findViewById(R.id.uti_gestiondispositivos_btnAdd);
-        btn_agregardispositivo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), uti_agegardispositivo.class);
-                startActivity(intent);
-            }
-        });
-
-        return view;
     }
 }
