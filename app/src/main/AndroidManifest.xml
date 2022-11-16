@@ -14,10 +14,13 @@
         android:theme="@style/Theme.PrestoPUCP"
         tools:targetApi="31">
         <activity
+            android:name=".usuarioti.uti_editardispositivo"
+            android:exported="false" />
+        <activity
             android:name=".usuarioti.uti_agegardispositivo"
-            android:screenOrientation="portrait"
             android:exported="false"
-            android:parentActivityName=".UsuarioTI"/>
+            android:parentActivityName=".UsuarioTI"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".UsuarioTI"
             android:exported="false"

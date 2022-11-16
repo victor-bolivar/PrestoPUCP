@@ -1,8 +1,9 @@
 package com.example.prestopucp.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Dispositivo {
+public class Dispositivo implements Serializable {
     public String getTipo() {
         return tipo;
     }
@@ -56,7 +57,8 @@ public class Dispositivo {
     private String Marca;
     private int stock;
     private String caracteristicas;
-    private  String incluye;
+    private String incluye;
+    private String key;
 
     public Dispositivo(String tipo,ArrayList<String> imagenes, String marca, int stock, String caracteristicas, String incluye) {
         this.tipo = tipo;
@@ -65,5 +67,24 @@ public class Dispositivo {
         this.stock = stock;
         this.caracteristicas = caracteristicas;
         this.incluye = incluye;
+    }
+
+    public Dispositivo(String tipo,ArrayList<String> imagenes, String marca, int stock, String caracteristicas, String incluye, String key) {
+        this.tipo = tipo;
+        this.imagenes = imagenes;
+        Marca = marca;
+        this.stock = stock;
+        this.caracteristicas = caracteristicas;
+        this.incluye = incluye;
+        this.setKey(key);
+    }
+
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

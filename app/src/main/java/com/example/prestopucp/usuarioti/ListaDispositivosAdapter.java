@@ -1,6 +1,7 @@
 package com.example.prestopucp.usuarioti;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.widget.TintableCheckedTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.prestopucp.R;
@@ -76,6 +79,17 @@ public class ListaDispositivosAdapter extends RecyclerView.Adapter<ListaDisposit
                     .resize(120, 120)
                     .into(imageView);
         }
+
+        // 3. onClick para ir a editar
+        ConstraintLayout constraintLayout = holder.itemView.findViewById(R.id.uti_dispositivo_fondo);
+        constraintLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, uti_editardispositivo.class);
+                intent.putExtra("dispositivo", dispositivo);
+                context.startActivity(intent);
+            }
+        });
 
     }
 

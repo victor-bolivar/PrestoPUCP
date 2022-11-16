@@ -176,10 +176,11 @@ public class uti_agegardispositivo extends AppCompatActivity {
                                     if (listaUrlImagenes.size() == imageList.size()){
                                                 // si es la ultima imagen, se guarda la info en RelTime Database
 
-                                                Dispositivo dispositivo = new Dispositivo(finalTipo, listaUrlImagenes, marca, stock, caracteristicas, incluye);
-                                                FirebaseDatabase.getInstance().getReference("dispositivos")
-                                                        .push() // para guardar un ID nuevo
-                                                        .setValue(dispositivo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                String key = FirebaseDatabase.getInstance().getReference("dispositivos")
+                                                        .push().getKey(); // para guardar un ID nuevo
+                                                Dispositivo dispositivo = new Dispositivo(finalTipo, listaUrlImagenes, marca, stock, caracteristicas, incluye, key);
+
+                                                FirebaseDatabase.getInstance().getReference("dispositivos").child(key).setValue(dispositivo).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                             @Override
                                                             public void onComplete(@NonNull Task<Void> task) {
                                                                 Log.d("msg / realtimedatabase", "se actualizo la info del dispositivo con la URL");
