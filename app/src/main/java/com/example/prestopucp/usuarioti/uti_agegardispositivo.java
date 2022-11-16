@@ -2,10 +2,12 @@ package com.example.prestopucp.usuarioti;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActionBar;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -114,6 +116,24 @@ public class uti_agegardispositivo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                if(numeroImagenesSeleccionadas < 3){
+                    // alert dialog para indicar al usuario que ingrese 3 imagenes como minimo
+                    AlertDialog.Builder alertdialogBuilder = new AlertDialog.Builder(uti_agegardispositivo.this);
+                    alertdialogBuilder.setMessage("Por favor, seleccionar 3 imagenes como minimo.");
+                    alertdialogBuilder.setCancelable(true);
+                    alertdialogBuilder.setPositiveButton(
+                            "Aceptar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert11 = alertdialogBuilder.create();
+                    alert11.show();
+
+                    return;
+                }
+
                 Spinner spinnnerTipo = findViewById(R.id.uti_agregardispsitivo_spinnertipo);
                 EditText editText_especificarTipo = findViewById(R.id.uti_agregardispositivo_especificartipo);
                 String tipo = spinnnerTipo.getSelectedItem().toString();
@@ -194,9 +214,13 @@ public class uti_agegardispositivo extends AppCompatActivity {
                 if (data.getClipData() != null){
                     int countClipData = data.getClipData().getItemCount();
                     Log.d("msg / n imagenes", String.valueOf(countClipData));
-                    numeroImagenesSeleccionadas = countClipData; // TODO validar que sean 3, sino no permitir crear dispositivo
-                    textView_numeroImagenesSeleccionadas.setText("Ha seleccionado " +String.valueOf(numeroImagenesSeleccionadas) + " imagenes");
+                    numeroImagenesSeleccionadas = countClipData;
 
+                    if (numeroImagenesSeleccionadas == 1){
+                        textView_numeroImagenesSeleccionadas.setText("Ha seleccionado 1 imagen");
+                    } else{
+                        textView_numeroImagenesSeleccionadas.setText("Ha seleccionado " +String.valueOf(numeroImagenesSeleccionadas) + " imagenes");
+                    }
 
                     int currentImageSelect = 0;
                     while (currentImageSelect < countClipData){
