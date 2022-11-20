@@ -7,7 +7,7 @@
     tools:context=".usuarioti.uti_solicitudespendientes">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
+        android:id="@+id/uti_solicitud_rechazar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#920011"
@@ -22,7 +22,7 @@
         app:srcCompat="@drawable/ic_crosswhite" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/uti_solicitud_aceptar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#7D96CC"
@@ -54,12 +54,12 @@
             android:paddingBottom="8dp">
 
             <TextView
-                android:id="@+id/textView_numeroSolicitud"
+                android:id="@+id/uti_solicitud_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:layout_marginTop="32dp"
-                android:text="Solicitud #1"
+                android:text="Solicitud #"
                 android:textAllCaps="false"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -77,33 +77,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="53dp"
                 android:layout_marginTop="37dp"
-                android:text="alumno"
+                android:text="nombre"
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/textView_nombre"
+                android:id="@+id/uti_solicitudes_nombre"
                 android:layout_width="288dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="53dp"
-                android:layout_marginTop="4dp"
-                android:text="Lionel Messi" />
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="53dp"
-                android:layout_marginTop="16dp"
-                android:text="código"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/textView_codigo"
-                android:layout_width="288dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="53dp"
-                android:layout_marginTop="8dp"
-                android:text="20180231" />
+                android:layout_marginTop="4dp" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -115,12 +97,12 @@
                 android:textSize="12sp" />
 
             <ImageView
-                android:id="@+id/imageView_dni"
-                app:srcCompat="@drawable/dni_ejemplo"
+                android:id="@+id/uti_solicitudes_imageView_dni"
                 android:layout_width="280dp"
                 android:layout_height="180dp"
                 android:layout_marginStart="53dp"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="16dp"
+                app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -132,12 +114,35 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/textView_curso2"
+                android:id="@+id/uti_solicitudes_curso"
                 android:layout_width="288dp"
                 android:layout_height="19dp"
                 android:layout_marginStart="53dp"
-                android:layout_marginTop="4dp"
-                android:text="Análisis de la campaña de alianza" />
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="16dp"
+                android:text="dispositivo solicitado"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/uti_solicitudes_dispositivo"
+                android:layout_width="288dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="4dp" />
+
+            <ImageView
+                android:id="@+id/uti_solicitudes_imageView_dispositivo"
+                android:layout_width="280dp"
+                android:layout_height="180dp"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="16dp"
+                app:srcCompat="@drawable/ic_computer" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -149,12 +154,11 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/textView_motivo"
+                android:id="@+id/uti_solicitudes_motivo"
                 android:layout_width="288dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="53dp"
-                android:layout_marginTop="8dp"
-                android:text="Rompi mi laptop cuando valera se falló el penal" />
+                android:layout_marginTop="8dp" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -166,12 +170,11 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/textView_tiempoReserva"
+                android:id="@+id/uti_solicitudes_tiempo"
                 android:layout_width="288dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="53dp"
-                android:layout_marginTop="8dp"
-                android:text="30 dias" />
+                android:layout_marginTop="8dp" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -183,12 +186,11 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/textView_programas"
+                android:id="@+id/uti_solicitudes_programas"
                 android:layout_width="288dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="53dp"
-                android:layout_marginTop="8dp"
-                android:text="FIFA22, Autocad, Word" />
+                android:layout_marginTop="8dp" />
 
             <TextView
                 android:id="@+id/textView15"
@@ -200,12 +202,11 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/textView_detallesAdicionales"
+                android:id="@+id/uti_solicitudes_detalles"
                 android:layout_width="288dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="53dp"
-                android:layout_marginTop="8dp"
-                android:text="tkm gareca" />
+                android:layout_marginTop="8dp" />
 
         </LinearLayout>
     </ScrollView>
