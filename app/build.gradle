@@ -51,6 +51,8 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:8.0.1'
     implementation 'com.google.android.gms:play-services-auth:20.2.0'
 
+    // google maps
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
 
 
 }

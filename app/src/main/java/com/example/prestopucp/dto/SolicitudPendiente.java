@@ -2,8 +2,25 @@ package com.example.prestopucp.dto;
 
 public class SolicitudPendiente {
 
+    // solicitud aceptada
+    private String longitud;
+    private String latitud;
 
+    public String getLongitud() {
+        return longitud;
+    }
 
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
+    }
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
 
     // solicitud rechazada
     private String motivoRechazo;
@@ -19,7 +36,7 @@ public class SolicitudPendiente {
 
     // solicitud pendiente
 
-    public SolicitudPendiente(String curso, String detalles, String dispositivoId, String dniUrl, String motivo, String nombre, String programas, String rol, String tiempoReserva, String id) {
+    public SolicitudPendiente(String curso, String detalles, String dispositivoId, String dniUrl, String motivo, String nombre, String programas, String rol, String tiempoReserva, String id, String emailUsuario) {
         this.curso = curso;
         this.detalles = detalles;
         this.dispositivoId = dispositivoId;
@@ -30,7 +47,18 @@ public class SolicitudPendiente {
         this.rol = rol;
         this.tiempoReserva = tiempoReserva;
         this.id = id;
+        this.emailUsuario = emailUsuario;
     }
+
+    public String getEmailUsuario() {
+        return emailUsuario;
+    }
+
+    public void setEmailUsuario(String emailUsuario) {
+        this.emailUsuario = emailUsuario;
+    }
+
+    private String emailUsuario;
 
     private String id;
 
@@ -124,4 +152,6 @@ public class SolicitudPendiente {
     public void setId(String id) {
         this.id = id;
     }
+
+
 }

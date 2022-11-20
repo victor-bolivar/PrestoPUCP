@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.prestopucp.R;
+import com.example.prestopucp.dto.Dispositivo;
 import com.example.prestopucp.dto.SolicitudPendiente;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -54,9 +55,11 @@ public class uti_solicitudespendientes extends Fragment {
     private FloatingActionButton floatingActionButton_rechazar;
 
     private int REQUEST_CODE_RECHAZAR_SOLICITUD = 1;
+    private int REQUEST_CODE_ACEPTAR_SOLICITUD = 2;
 
     private List<SolicitudPendiente> solicitudesPendientes;
     private SolicitudPendiente solicitudActual;
+    private Dispositivo dispositivoSolicitado;
 
 
 
@@ -119,7 +122,8 @@ public class uti_solicitudespendientes extends Fragment {
                             ds.child("programas").getValue().toString(),
                             ds.child("rol").getValue().toString(),
                             ds.child("tiempoReserva").getValue().toString(),
-                            ds.getKey()
+                            ds.getKey(),
+                            ds.child("emailUsuario").getValue().toString()
 
                     ));
                 }
@@ -153,6 +157,15 @@ public class uti_solicitudespendientes extends Fragment {
                             textView_dispositivo.setText(
                                     data.get("tipo") + " " + data.get("marca") + " (Stock: "+ String.valueOf(data.get("stock")) + ")"
                             );
+                            // se llena la informacion del dispositivo (se usara para luego actualizar el stock si se aprueba)
+                            dispositivoSolicitado = new Dispositivo(
+                                    (String)data.get("tipo"),
+                                    (ArrayList<String>) data.get("imagenes"),
+                                    (String) data.get("marca"),
+                                    Math.toIntExact((Long) data.get("stock")),
+                                    (String) data.get("caracteristicas"),
+                                    (String) data.get("incluye"),
+                                    (String) data.get("key"));
 
                             ArrayList<String> urlImagenes = (ArrayList<String>) data.get("imagenes");
                             Picasso.with(getActivity())
@@ -173,16 +186,17 @@ public class uti_solicitudespendientes extends Fragment {
         };
         usersRef.addListenerForSingleValueEvent(valueEventListener);
 
-//        // TODO aceptar
-//        floatingActionButton_aceptar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // mostrar
-//            }
-//        });
+        //  aceptar solicitud
+        floatingActionButton_aceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), uti_aceptarsolicitud.class);
+                startActivityForResult(intent, REQUEST_CODE_ACEPTAR_SOLICITUD);
+            }
+        });
 
 
-        // TODO rechazar solicitud
+        //  rechazar solicitud
         floatingActionButton_rechazar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -198,16 +212,63 @@ public class uti_solicitudespendientes extends Fragment {
 
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==1 && resultCode== Activity.RESULT_OK){
+        if(resultCode== Activity.RESULT_OK){
 
-            String motivo = data.getStringExtra("motivo");
-            solicitudActual.setMotivoRechazo(motivo);
+            if(requestCode==REQUEST_CODE_RECHAZAR_SOLICITUD){
 
-            // se guarda en solicitudes rechazadas
-            mDatabase.child("solicitudesRechazadas").child(solicitudActual.getId()).setValue(solicitudActual);
+                String motivo = data.getStringExtra("motivo");
+                solicitudActual.setMotivoRechazo(motivo);
 
-            // se borra de solicitudes pendientes
-            mDatabase.child("solicitudesPendientes").child(solicitudActual.getId()).removeValue();
+                // se guarda en solicitudes rechazadas
+                mDatabase.child("solicitudesRechazadas").child(solicitudActual.getId()).setValue(solicitudActual);
+
+                // se borra de solicitudes pendientes
+                mDatabase.child("solicitudesPendientes").child(solicitudActual.getId()).removeValue();
+                
+                // se manda la notificacion (correo + notificacion app) al cliente, indicando que se rechazo su solicitud
+                notificarCliente("rechazo");
+
+            } else if (requestCode == REQUEST_CODE_ACEPTAR_SOLICITUD){
+                String longitud = data.getStringExtra("longitud");
+                String latitud = data.getStringExtra("latitud");
+                Log.d("msg", longitud + " "+ latitud);
+
+                solicitudActual.setLatitud(latitud);
+                solicitudActual.setLongitud(longitud);
+
+                // se guarda en solicitudes aprobadas
+                mDatabase.child("solicitudesAprobadas").child(solicitudActual.getId()).setValue(solicitudActual);
+
+                // se borra de solicitudes pendientes
+                mDatabase.child("solicitudesPendientes").child(solicitudActual.getId()).removeValue();
+
+                // se actualiza el stock del dispositivo
+                dispositivoSolicitado.setStock( dispositivoSolicitado.getStock() - 1 );
+                FirebaseDatabase.getInstance().getReference("dispositivos").child(dispositivoSolicitado.getKey()).setValue(dispositivoSolicitado).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.d("msg / realtimedatabase", "se actualizo la info del dispositivo con la URL");
+
+                    }
+                });
+
+                // se manda la notificacion (correo + notificacion app) al cliente, indicando que se acepto su solicitud
+                notificarCliente("aceptado");
+
+
+            }
+
+        }
+
+    }
+
+    public void notificarCliente(String resultado){
+        // TODO se enviara la notificacion a la app del cliente
+        // TODO se enviara el correo al usuario usando el backend microservicios de la app
+
+        if (resultado.equals("aceptado")){
+
+        } else if (resultado.equals("rechazo")){
 
         }
     }
