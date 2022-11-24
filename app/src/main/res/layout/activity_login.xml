@@ -45,7 +45,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="245dp"
+        android:layout_marginBottom="90dp"
         android:text="contraseña"
+        app:layout_constraintBottom_toBottomOf="@+id/box"
+        app:layout_constraintEnd_toEndOf="@+id/box"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_email" />
 
@@ -96,9 +100,11 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="64dp"
+        android:layout_marginBottom="225dp"
         android:text="Inicia sesión para continuar"
         android:textSize="34sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/box" />
@@ -109,7 +115,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="281dp"
+        android:layout_marginBottom="178dp"
         android:text="email"
+        app:layout_constraintBottom_toBottomOf="@+id/box"
+        app:layout_constraintEnd_toEndOf="@+id/box"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line" />
 
@@ -120,8 +130,10 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="64dp"
+        android:layout_marginBottom="124dp"
         android:ems="10"
         android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="@+id/box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
