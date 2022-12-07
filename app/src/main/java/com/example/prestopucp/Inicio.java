@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.prestopucp.dto.User;
+import com.example.prestopucp.usuarioCliente.UsuarioClienteActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.IdpResponse;
@@ -74,17 +75,19 @@ public class Inicio extends AppCompatActivity {
                         Log.d("msg / firebase", String.valueOf(task.getResult().getValue()));
                         HashMap<String, String> data = (HashMap<String, String>) task.getResult().getValue();
                         String privilegio = data.get("privilegio");
-
+                        Intent intent = null;
                         switch(privilegio){
                             case "UsuarioTI":
-                                Intent intent = new Intent(Inicio.this, UsuarioTI.class);
-                                startActivity( intent );
+                                intent = new Intent(Inicio.this, UsuarioTI.class);
+
                                 break;
 
                             case "Cliente":
                                 // TODO
                                 Log.d("msg", "ir a pagina principal de cliente");
-                                mAuth.signOut();
+                                intent = new Intent(Inicio.this, UsuarioClienteActivity.class);
+
+                                //mAuth.signOut();
                                 break;
                             case "Admin":
                                 // TODO
@@ -92,6 +95,7 @@ public class Inicio extends AppCompatActivity {
                                 mAuth.signOut();
                                 break;
                         }
+                        startActivity(intent);
 
 
                     }

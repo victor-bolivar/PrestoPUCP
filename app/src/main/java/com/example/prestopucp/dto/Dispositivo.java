@@ -1,8 +1,12 @@
 package com.example.prestopucp.dto;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.io.Serializable;
+import java.nio.file.attribute.DosFileAttributes;
 import java.util.ArrayList;
 
+@IgnoreExtraProperties
 public class Dispositivo implements Serializable {
     public String getTipo() {
         return tipo;
@@ -59,6 +63,8 @@ public class Dispositivo implements Serializable {
     private String caracteristicas;
     private String incluye;
     private String key;
+
+    public Dispositivo(){}
 
     public Dispositivo(String tipo,ArrayList<String> imagenes, String marca, int stock, String caracteristicas, String incluye) {
         this.tipo = tipo;

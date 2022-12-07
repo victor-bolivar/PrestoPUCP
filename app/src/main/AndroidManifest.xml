@@ -13,16 +13,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PrestoPUCP"
         tools:targetApi="31">
+        <activity
+            android:name=".usuarioCliente.UsuarioClienteActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCcfy4YQ4n9CyKz0OgPt-S58FUyYon0Sjw"/>
+            android:value="AIzaSyCcfy4YQ4n9CyKz0OgPt-S58FUyYon0Sjw" />
 
         <activity
             android:name=".usuarioti.uti_aceptarsolicitud"
             android:exported="false"
             android:parentActivityName=".UsuarioTI"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".usuarioti.uti_rechazarsolicitud"
             android:exported="false"

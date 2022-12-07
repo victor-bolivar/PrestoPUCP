@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="60dp"
+    android:orientation="vertical"
+    tools:context=".usuarioCliente.Fragments.DispositivoDetalleFragment">
+
+    <TextView
+        android:id="@+id/titulo_fragment_detalle_producto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Detalle Dispositivo"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:gravity="center">
+
+    </TextView>
+    <ImageView
+        android:id="@+id/imagen_producto_detalle"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/dni_ejemplo"
+        android:layout_gravity="center"
+        android:paddingTop="10dp">
+    </ImageView>
+    <TextView
+        android:id="@+id/titulo_producto_detalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tipo: "
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp">
+
+    </TextView>
+    <TextView
+        android:id="@+id/tipo_dispositivo_detalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="tipo Producto :"
+        android:textSize="30sp"
+        android:gravity="center">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/titulo_marca_detalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Marca :"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp">
+
+    </TextView>
+    <TextView
+        android:id="@+id/marca_dispositivo_detalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="nombre marca :"
+        android:textSize="30sp"
+        android:gravity="center">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/titulo_caracteristica_detalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="caracteristica :"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp">
+
+    </TextView>
+    <TextView
+        android:id="@+id/caracteristica_dispositivo_detalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="caracteristica :"
+        android:textSize="30sp"
+        android:gravity="center">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/titulo_stock_detalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="stock :"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp">
+
+    </TextView>
+    <TextView
+        android:id="@+id/stock_dispositivo_detalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="stock :"
+        android:textSize="30sp"
+        android:gravity="center">
+
+    </TextView>
+
+    <Button
+        android:id="@+id/reservar_dispositivo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="registroUsuario"
+        android:text="Reservar" />
+
+</LinearLayout>

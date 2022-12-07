@@ -111,7 +111,7 @@ public class uti_solicitudespendientes extends Fragment {
                 solicitudesPendientes = new ArrayList<SolicitudPendiente>();
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                    // String uid = ds.getKey();
+                    //String uid = ds.getKey();
                     solicitudesPendientes.add(new SolicitudPendiente(
                             ds.child("curso").getValue().toString(),
                             ds.child("detalles").getValue().toString(),
