@@ -7,22 +7,21 @@
     tools:context=".usuarioCliente.UsuarioClienteActivity"
     android:id="@+id/drawerCliente">
 
-    <include android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/drawer_toolbar_cliente">
-
-    </include>
-    <include android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/content_cliente">
-
-    </include>
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigationViewCliente"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerViewCliente"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:name="com.example.prestopucp.usuarioCliente.Fragments.DispositivosFragment"
+        />
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationViewCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+
         app:menu="@menu/drawer_menu_cliente"
-        app:headerLayout="@layout/drawer_header_cliente"
+        app:headerLayout="@layout/nav_header_usuarioti"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"/>
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/id_perfil_admin"
+        android:title="Mi cuenta"
+        />
+
+    <item android:id="@+id/id_usuarioTi_admin"
+        android:title="Usuarios TI"
+        />
+
+    <item android:id="@+id/id_reportes_admin"
+        android:title="Reportes"
+        />
+
+</menu>

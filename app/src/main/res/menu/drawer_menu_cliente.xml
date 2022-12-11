@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/dispositivos_disponibles"
+    <item android:id="@+id/nav_perfil_usuarioti"
+        android:title="Perfil "
+        >
+    </item>
+    <item android:id="@+id/nav_dispositivos_disponibles"
         android:title="Dispositivos disponibles"
         >
     </item>
-    <item android:id="@+id/solicitud_prestamo"
+    <item android:id="@+id/nav_solicitud_prestamo"
         android:title="Solicitudes de préstamo"
         >
     </item>
-    <item android:id="@+id/historial_prestamo"
+    <item android:id="@+id/nav_historial_prestamo"
         android:title="Historial de préstamos"
         >
     </item>

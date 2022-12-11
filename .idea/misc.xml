@@ -25,26 +25,38 @@
         <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/nav_header_usuarioti.xml" value="0.536" />
         <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/layout/uti_itemdispositivo.xml" value="0.5" />
         <entry key="..\:/Users/victo/Documents/PUCP/PrestoPUCP/app/src/main/res/menu/nav_menu_usuatioti.xml" value="0.253125" />
+        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/activity_editar_usuario_ti.xml" value="0.3625" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/activity_inicio.xml" value="0.36666666666666664" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/activity_register.xml" value="0.36666666666666664" />
+        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/activity_reserva_dispositivo.xml" value="0.3039918116683726" />
+        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/activity_usuario_admin.xml" value="0.22239583333333332" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/activity_usuario_cliente.xml" value="0.22644927536231885" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/activity_usuario_ti.xml" value="0.18802083333333333" />
+        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/activity_usuario_ti_agregar.xml" value="0.33" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/activity_uti_aceptarsolicitud.xml" value="0.2798913043478261" />
-        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/activity_uti_agegardispositivo.xml" value="0.36666666666666664" />
-        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/activity_uti_editardispositivo.xml" value="0.22644927536231885" />
+        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/activity_uti_agegardispositivo.xml" value="0.3397341211225997" />
+        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/activity_uti_editardispositivo.xml" value="0.18456883509833585" />
+        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/activity_uti_rechazarsolicitud.xml" value="0.22239583333333332" />
+        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/admin_usuariosti.xml" value="0.5" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/content_cliente.xml" value="0.184375" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/drawer_header_cliente.xml" value="0.3740875912408759" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/drawer_toolbar_cliente.xml" value="0.184375" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/fragment_dispositivo_detalle.xml" value="0.3625" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/fragment_dispositivos.xml" value="0.2653985507246377" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/fragment_historial_prestamo.xml" value="0.2653985507246377" />
+        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/fragment_reportes.xml" value="0.15982776089159068" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/fragment_reservar_dis.xml" value="0.3625" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/fragment_solicitud_prestamo.xml" value="0.2653985507246377" />
+        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/fragment_usuario_ti.xml" value="0.15982776089159068" />
+        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/fragment_uti_gestiondispositivos.xml" value="0.22239583333333332" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/fragment_uti_micuenta.xml" value="0.2798913043478261" />
-        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/fragment_uti_solicitudespendientes.xml" value="0.25" />
+        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/fragment_uti_solicitudespendientes.xml" value="0.33" />
+        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/list_historial_reserva.xml" value="0.203125" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/list_productos.xml" value="0.33" />
-        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/nav_header_usuarioti.xml" value="0.18802083333333333" />
+        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/nav_header_usuarioti.xml" value="0.33" />
+        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/layout/uti_itemdispositivo.xml" value="0.5" />
+        <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/menu/drawe_menu_admin.xml" value="0.22135416666666666" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/menu/drawer_menu_cliente.xml" value="0.31927083333333334" />
         <entry key="..\:/ciclo 2022-2/SERVICIOS Y APLICACIONES PARA IOT/TRABAJO GRUPAL/PrestoPUCP/app/src/main/res/menu/nav_menu_usuatioti.xml" value="0.33" />
       </map>

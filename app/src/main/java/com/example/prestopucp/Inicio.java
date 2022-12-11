@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.prestopucp.dto.User;
+import com.example.prestopucp.usuarioAdmin.UsuarioAdminActivity;
 import com.example.prestopucp.usuarioCliente.UsuarioClienteActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
@@ -92,7 +93,9 @@ public class Inicio extends AppCompatActivity {
                             case "Admin":
                                 // TODO
                                 Log.d("msg", "ir a pagina principal de Admin");
-                                mAuth.signOut();
+                                intent = new Intent(Inicio.this, UsuarioAdminActivity.class);
+
+                                //mAuth.signOut();
                                 break;
                         }
                         startActivity(intent);

@@ -1,6 +1,8 @@
 package com.example.prestopucp.usuarioCliente.Adaptadores;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,82 +18,106 @@ import com.example.prestopucp.dto.Dispositivo;
 import com.example.prestopucp.R;
 import com.example.prestopucp.usuarioCliente.Fragments.DispositivosFragment;
 import com.example.prestopucp.usuarioCliente.Fragments.ReservarDisFragment;
+import com.example.prestopucp.usuarioCliente.ReservaDispositivoActivity;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class AdapterDispositivos extends RecyclerView.Adapter<AdapterDispositivos.ViewHolder> implements View.OnClickListener {
+public class AdapterDispositivos extends RecyclerView.Adapter<AdapterDispositivos.DispositivoViewHolder>  {
 
-    ArrayList<Dispositivo> model;
-    LayoutInflater inflater;
-    iComunicaFragment comunicaFragment;
-    //listener
-    private View.OnClickListener listener;
 
-    ReservarDisFragment reservarDisFragment;
-    DispositivosFragment dispositivosFragment;
 
-    public AdapterDispositivos(Context context, ArrayList<Dispositivo> listDispositivos){
-        this.inflater = LayoutInflater.from(context);
-        this.model=listDispositivos;
-    }
+    //nuevos parametros///
 
-    @Override
-    public void onClick(View view) {
-        if (listener!=null){
-            listener.onClick(view);
+    // tiene que guardar la data
+    private Dispositivo[] listaDispositivos;
+    // para guardar el contexto de la actividad donde se va a pintar el RecyclerView
+    private Context context;
+
+
+    public class DispositivoViewHolder extends RecyclerView.ViewHolder{
+
+        Dispositivo d;
+
+        public DispositivoViewHolder(@NonNull View itemView){
+            super(itemView);
         }
     }
 
+
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.list_productos,parent,false);
-        view.setOnClickListener(this);
-        return new ViewHolder(view);
+    public DispositivoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.list_productos,parent,false);
+        return new DispositivoViewHolder(view);
     }
 
-    public void setOnClickListener(View.OnClickListener listener){
-        this.listener=listener;
-    }
+
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DispositivoViewHolder holder, int position) {
 
-        String marca = model.get(position).getMarca();
-        int stock = model.get(position).getStock();
-        String tipo = model.get(position).getTipo();
+        Dispositivo dispositivo = listaDispositivos[position];
+        holder.d = dispositivo;
 
-        holder.stockDis.setText(String.valueOf(stock));
-        holder.marcaDis.setText(marca);
-        holder.tipoDis.setText(tipo);
-        holder.reservadis.setOnClickListener(new View.OnClickListener() {
+        //colocar datos
+        TextView textView_tipo = holder.itemView.findViewById(R.id.id_tipo_dispositivo);
+        textView_tipo.setText(dispositivo.getTipo());
+
+        TextView textView_marca = holder.itemView.findViewById(R.id.id_marca_dispositivo);
+        textView_marca.setText(dispositivo.getMarca());
+
+        TextView textView_stock = holder.itemView.findViewById(R.id.id_stock_dispositivo);
+        textView_stock.setText("Stock : " + String.valueOf(dispositivo.getStock()));
+
+        ImageView imageView = holder.itemView.findViewById(R.id.imagen_cv_producto);
+
+        String urlImagen = dispositivo.getImagenes().get(0);
+        if (urlImagen.equals("")){
+            imageView.setBackgroundResource(R.drawable.imagen_ejemplo_dispositivo);
+            Log.d("msg", "imagen predefinida dispositivo");
+        } else {
+            // se coloca la imagen con Picasso
+            Picasso.with(context)
+                    .load(urlImagen)
+                    .resize(120, 120)
+                    .into(imageView);
+        }
+
+
+        Button btn_reserva = holder.itemView.findViewById(R.id.id_btn_reservar_dispositivo);
+
+        btn_reserva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //comunicaFragment.envidarDetalleDispositivo(model.get(position));
+                Intent intent = new Intent(context, ReservaDispositivoActivity.class);
+                intent.putExtra("dispositivoReservar",dispositivo);
+                context.startActivity(intent);
             }
         });
-
 
     }
 
     @Override
     public int getItemCount() {
-        return model.size();
+        return listaDispositivos.length;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public Dispositivo[] getListaDispositivos() {
+        return listaDispositivos;
+    }
 
-        TextView tipoDis,marcaDis,stockDis;
-        Button reservadis;
-        ImageView imageView;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
+    public void setListaDispositivos(Dispositivo[] listaDispositivos) {
+        this.listaDispositivos = listaDispositivos;
+    }
 
-            tipoDis = itemView.findViewById(R.id.id_tipo_dispositivo);
-            marcaDis = itemView.findViewById(R.id.id_marca_dispositivo);
-            stockDis = itemView.findViewById(R.id.id_stock_dispositivo);
-            reservadis = itemView.findViewById(R.id.id_btn_reservar_dispositivo);
-        }
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 }

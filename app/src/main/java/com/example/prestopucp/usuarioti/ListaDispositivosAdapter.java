@@ -31,10 +31,6 @@ public class ListaDispositivosAdapter extends RecyclerView.Adapter<ListaDisposit
         Dispositivo d;
 
         public DispositivoViewHolder(@NonNull View itemView){
-
-            // TODO aca gestionar si, cuando se haga clic sobre un elemento se querra editarlo
-            // ya que esta clase interna representa un solo elemento
-
             super(itemView);
         }
     }

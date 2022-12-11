@@ -58,11 +58,7 @@ public class SolicitudPendiente {
         this.emailUsuario = emailUsuario;
     }
 
-    private String emailUsuario;
 
-    private String id;
-
-    private String curso;
 
     public String getCurso() {
         return curso;
@@ -135,6 +131,12 @@ public class SolicitudPendiente {
     public void setTiempoReserva(String tiempoReserva) {
         this.tiempoReserva = tiempoReserva;
     }
+
+    private String emailUsuario;
+
+    private String id;
+
+    private String curso;
 
     private String detalles;
     private String dispositivoId;
