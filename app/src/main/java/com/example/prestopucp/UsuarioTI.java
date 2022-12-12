@@ -10,7 +10,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.prestopucp.usuarioti.uti_gestiondispositivos;
 import com.example.prestopucp.usuarioti.uti_micuenta;
@@ -18,10 +20,15 @@ import com.example.prestopucp.usuarioti.uti_solicitudespendientes;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class UsuarioTI extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
@@ -32,6 +39,7 @@ public class UsuarioTI extends AppCompatActivity {
         setContentView(R.layout.activity_usuario_ti);
 
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         // 1. creacion del drawer layout
 
@@ -104,6 +112,27 @@ public class UsuarioTI extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+
+        // 4. se cambia el nombre del usuario para que salga en el NavDrawer
+        mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.e("msg / firebase", "Error getting data", task.getException());
+            }
+            else {
+                Log.d("msg / firebase", String.valueOf(task.getResult().getValue()));
+                HashMap<String, String> data = (HashMap<String, String>) task.getResult().getValue();
+
+                String nombreCompleto = data.get("nombre");
+                Log.d("msg / null", String.valueOf(nombreCompleto));
+                if (nombreCompleto!=null){
+                    TextView textView_navdrawer_nombre = findViewById(R.id.uti_navdrawer_nombreusuario);
+                    textView_navdrawer_nombre.setText(nombreCompleto);
+                    Log.d("msg", nombreCompleto);
+                }
+
+            }
+        });
+
     }
 
     // NavigationDrawer

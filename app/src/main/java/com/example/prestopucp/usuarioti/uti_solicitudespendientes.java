@@ -1,12 +1,14 @@
 package com.example.prestopucp.usuarioti;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -128,54 +130,82 @@ public class uti_solicitudespendientes extends Fragment {
                     ));
                 }
 
-                // se pinta el primer elemento
-                solicitudActual = solicitudesPendientes.get(0);
+                if (solicitudesPendientes.size() == 0){
+                    // si no hay solicitudes restantes
+                    dialogNoHayMasSolicitudesPendientes();
 
-                textView_solicitudID.setText("Solicitud #"+ solicitudActual.getId());
-                textView_nombre.setText(solicitudActual.getNombre());
-                textView_curso.setText(solicitudActual.getCurso());
-                textView_motivo.setText(solicitudActual.getNombre());
-                textView_tiempo.setText(solicitudActual.getTiempoReserva());
-                textView_programas.setText(solicitudActual.getProgramas());
-                textView_detalles.setText(solicitudActual.getDetalles());
-                Picasso.with(getActivity())
-                        .load(solicitudActual.getDniUrl())
-                        .resize(convertirDpPixel(280), convertirDpPixel(180))
-                        .into(imageView_dni);
+                    // se limpianl los datos
+                    solicitudActual = null;
+                    textView_solicitudID.setText("No hay mas solicitudes");
 
-                // obtener info del dispositivo
-                mDatabase.child("dispositivos").child(solicitudActual.getDispositivoId()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if (!task.isSuccessful()) {
-                            Log.e("firebase", "Error getting data", task.getException());
+                    textView_solicitudID.setText("No hay mas solicitudes");
+                    textView_nombre.setText("");
+                    textView_curso.setText("");
+                    textView_motivo.setText("");
+                    textView_tiempo.setText("");
+                    textView_programas.setText("");
+                    textView_detalles.setText("");
+                    Picasso.with(getActivity())
+                            .load(R.drawable.ic_computer)
+                            .resize(convertirDpPixel(280), convertirDpPixel(180))
+                            .into(imageView_dni);
+                    textView_dispositivo.setText("");
+                    Picasso.with(getActivity())
+                            .load(R.drawable.ic_computer)
+                            .resize(convertirDpPixel(280), convertirDpPixel(280))
+                            .into(imageView_dispositivo);
+
+                } else{
+                    // se pinta el primer elemento
+                    solicitudActual = solicitudesPendientes.get(0);
+
+                    textView_solicitudID.setText("Solicitud #"+ solicitudActual.getId());
+                    textView_nombre.setText(solicitudActual.getNombre());
+                    textView_curso.setText(solicitudActual.getCurso());
+                    textView_motivo.setText(solicitudActual.getNombre());
+                    textView_tiempo.setText(solicitudActual.getTiempoReserva());
+                    textView_programas.setText(solicitudActual.getProgramas());
+                    textView_detalles.setText(solicitudActual.getDetalles());
+                    Picasso.with(getActivity())
+                            .load(solicitudActual.getDniUrl())
+                            .resize(convertirDpPixel(280), convertirDpPixel(180))
+                            .into(imageView_dni);
+
+                    // obtener info del dispositivo
+                    mDatabase.child("dispositivos").child(solicitudActual.getDispositivoId()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                            if (!task.isSuccessful()) {
+                                Log.e("firebase", "Error getting data", task.getException());
+                            }
+                            else {
+                                HashMap<String, Object> data = (HashMap<String, Object>) task.getResult().getValue();
+
+
+                                textView_dispositivo.setText(
+                                        data.get("tipo") + " " + data.get("marca") + " (Stock: "+ String.valueOf(data.get("stock")) + ")"
+                                );
+                                // se llena la informacion del dispositivo (se usara para luego actualizar el stock si se aprueba)
+                                dispositivoSolicitado = new Dispositivo(
+                                        (String)data.get("tipo"),
+                                        (ArrayList<String>) data.get("imagenes"),
+                                        (String) data.get("marca"),
+                                        Math.toIntExact((Long) data.get("stock")),
+                                        (String) data.get("caracteristicas"),
+                                        (String) data.get("incluye"),
+                                        (String) data.get("key"));
+
+                                ArrayList<String> urlImagenes = (ArrayList<String>) data.get("imagenes");
+                                Picasso.with(getActivity())
+                                        .load(urlImagenes.get(0))
+                                        .resize(convertirDpPixel(280), convertirDpPixel(280))
+                                        .into(imageView_dispositivo);
+
+                            }
                         }
-                        else {
-                            HashMap<String, Object> data = (HashMap<String, Object>) task.getResult().getValue();
+                    });
+                }
 
-
-                            textView_dispositivo.setText(
-                                    data.get("tipo") + " " + data.get("marca") + " (Stock: "+ String.valueOf(data.get("stock")) + ")"
-                            );
-                            // se llena la informacion del dispositivo (se usara para luego actualizar el stock si se aprueba)
-                            dispositivoSolicitado = new Dispositivo(
-                                    (String)data.get("tipo"),
-                                    (ArrayList<String>) data.get("imagenes"),
-                                    (String) data.get("marca"),
-                                    Math.toIntExact((Long) data.get("stock")),
-                                    (String) data.get("caracteristicas"),
-                                    (String) data.get("incluye"),
-                                    (String) data.get("key"));
-
-                            ArrayList<String> urlImagenes = (ArrayList<String>) data.get("imagenes");
-                            Picasso.with(getActivity())
-                                    .load(urlImagenes.get(0))
-                                    .resize(convertirDpPixel(280), convertirDpPixel(280))
-                                    .into(imageView_dispositivo);
-
-                        }
-                    }
-                });
 
             }
 
@@ -283,4 +313,21 @@ public class uti_solicitudespendientes extends Fragment {
 
         return px;
     }
+
+    public void dialogNoHayMasSolicitudesPendientes(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+        builder1.setMessage("Buen trabajo! No hay mas solicitudes pendientes por revisar");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Aceptar",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
 }
