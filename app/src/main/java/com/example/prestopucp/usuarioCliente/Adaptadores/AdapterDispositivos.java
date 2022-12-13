@@ -28,9 +28,6 @@ import java.util.ArrayList;
 public class AdapterDispositivos extends RecyclerView.Adapter<AdapterDispositivos.DispositivoViewHolder>  {
 
 
-
-    //nuevos parametros///
-
     // tiene que guardar la data
     private Dispositivo[] listaDispositivos;
     // para guardar el contexto de la actividad donde se va a pintar el RecyclerView

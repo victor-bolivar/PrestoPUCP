@@ -27,22 +27,23 @@
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
 
-            android:text="Laptop"
-            android:textStyle="bold"
-            android:textSize="15dp"
             android:layout_toEndOf="@+id/id_imagen_histRese"
-            android:layout_toRightOf="@+id/id_imagen_histRese"/>
+            android:layout_toRightOf="@+id/id_imagen_histRese"
+            android:text="Laptop"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/id_text_estado_hr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:text="Pendiente"
-            android:textStyle="bold"
-            android:textSize="15dp"
             android:layout_toEndOf="@+id/id_text_tipo_hr"
-            android:layout_toRightOf="@+id/id_text_tipo_hr"/>
+            android:layout_toRightOf="@+id/id_text_tipo_hr"
+            android:text="Pendiente"
+            android:textSize="15dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/id_text_curso_hr"

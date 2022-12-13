@@ -17,6 +17,7 @@ import com.example.prestopucp.Constantes.Constante;
 import com.example.prestopucp.R;
 import com.example.prestopucp.dto.Dispositivo;
 import com.example.prestopucp.dto.ReservaDispositivo;
+import com.example.prestopucp.dto.SolicitudPendiente;
 import com.example.prestopucp.usuarioCliente.Adaptadores.AdapterHistorialPrestamos;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -64,25 +65,34 @@ public class HistorialPrestamoFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        String idUser = mAuth.getUid();
-        mDatabase.child(Constante.DB_USERS).child(idUser).child(Constante.DB_HISTORIAL_RESERVAS).addListenerForSingleValueEvent(new ValueEventListener() {
+        String idUser = mAuth.getCurrentUser().getUid();
+        //solicitudes aprobadas
+        mDatabase.child("solicitudesAprobadas").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
-                    ArrayList<ReservaDispositivo> listReservas = new ArrayList<ReservaDispositivo>();
+                    ArrayList<SolicitudPendiente> listReservas = new ArrayList<SolicitudPendiente>();
                     for (DataSnapshot reservaSnap : snapshot.getChildren()){
                         if (reservaSnap.exists()){
                             Log.d("msg historial", reservaSnap.getValue().toString());
-                            ReservaDispositivo reseDis = (ReservaDispositivo) reservaSnap.getValue(ReservaDispositivo.class);
+
+                            SolicitudPendiente ga = new SolicitudPendiente();
+
+                            //SolicitudPendiente reseDis = (SolicitudPendiente) reservaSnap.getValue(SolicitudPendiente.class);
+                            if (reservaSnap.child("nombre").getValue().toString().equals(idUser)){
+                                //ga.setCurso();
+                                // listReservas.add(reseDis);
+                            }
+                            // String marca = dispositivoSnapshot.child("marca").getValue().toString();
                             //og.d("msg",reseDis.getTipo() + " " + reseDis.getIdDispositivo() + " " + reseDis.getEstadoReserva());
-                            listReservas.add(reseDis);
+
                         }
                     }
 
-                    ReservaDispositivo[] arrayHistoPrestamos = new ReservaDispositivo[listReservas.size()];
-                    listReservas.toArray(arrayHistoPrestamos);
+                    SolicitudPendiente[] arrayHistoAprobados = new SolicitudPendiente[listReservas.size()];
+                    listReservas.toArray(arrayHistoAprobados);
                     AdapterHistorialPrestamos adapterHistorialPrestamos = new AdapterHistorialPrestamos();
-                    adapterHistorialPrestamos.setListHistorialReservas(arrayHistoPrestamos);
+                    adapterHistorialPrestamos.setListHistorialReservas(arrayHistoAprobados);
                     adapterHistorialPrestamos.setContext(getActivity());
 
                     recyclerViewHistorial.setAdapter(adapterHistorialPrestamos);

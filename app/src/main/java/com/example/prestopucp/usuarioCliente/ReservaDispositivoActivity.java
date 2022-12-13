@@ -20,6 +20,7 @@ import com.example.prestopucp.Constantes.Constante;
 import com.example.prestopucp.R;
 import com.example.prestopucp.dto.Dispositivo;
 import com.example.prestopucp.dto.ReservaDispositivo;
+import com.example.prestopucp.dto.SolicitudPendiente;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,6 +41,7 @@ public class ReservaDispositivoActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
+    SolicitudPendiente solicitudPendiente;
 
     private Uri imagenUrl;
     String dniUrl;
@@ -104,7 +106,7 @@ public class ReservaDispositivoActivity extends AppCompatActivity {
             }
         });
 
-        Log.d("msg dni url aaa", dniUrl.toString().trim());
+        //Log.d("msg dni url aaa", dniUrl.toString().trim());
 
         btn_reservar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +118,27 @@ public class ReservaDispositivoActivity extends AppCompatActivity {
                 String programas = motivoCli.getText().toString().trim();
                 String otros = motivoCli.getText().toString().trim();
 
+                String keyReserva =  FirebaseDatabase.getInstance()
+                        .getReference()
+                        .child(Constante.DB_SOLICITUDES_PENDIENTES).push().getKey();
 
+
+                solicitudPendiente = new SolicitudPendiente(curso,otros,dispositivo.getKey(),mAuth.getCurrentUser().getUid()
+                ,motivo,"nombre no se",programas,"rol usuario",dias,keyReserva,mAuth.getCurrentUser().getEmail());
+
+                FirebaseDatabase.getInstance()
+                        .getReference()
+                        .child(Constante.DB_SOLICITUDES_PENDIENTES).child(keyReserva)
+                        .setValue(solicitudPendiente).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Log.d("msg reservar", "se guardo exitosamente");
+                                Toast.makeText(ReservaDispositivoActivity.this, "Se hizo la Reserva del dispositivo", Toast.LENGTH_LONG).show();
+                                finish();
+                                return;
+                            }
+                        });
+        /**
                 reservaDispositivo = new ReservaDispositivo();
                 reservaDispositivo.setIdDispositivo(dispositivo.getKey());
                 reservaDispositivo.setIdUsuario(mAuth.getCurrentUser().getUid());
@@ -143,7 +165,9 @@ public class ReservaDispositivoActivity extends AppCompatActivity {
                 FirebaseDatabase.getInstance()
                         .getReference(Constante.DB_USERS).child(mAuth.getCurrentUser().getUid())
                         .child(Constante.DB_HISTORIAL_RESERVAS).child(llaveReserva)
-                        .setValue(reservaDispositivo);
+                        .setValue(reservaDispositivo);*/
+
+
 
             }
         });
@@ -171,8 +195,9 @@ public class ReservaDispositivoActivity extends AppCompatActivity {
 
                         Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                         while (!uriTask.isSuccessful()){
-                            btn_reservar.setEnabled(false);
+                            //btn_reservar.setEnabled(false);
                             if (uriTask.isSuccessful()){
+                              //  btn_reservar.setEnabled(true);
                                 uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {

@@ -6,6 +6,10 @@ public class SolicitudPendiente {
     private String longitud;
     private String latitud;
 
+    public SolicitudPendiente() {
+
+    }
+
     public String getLongitud() {
         return longitud;
     }
