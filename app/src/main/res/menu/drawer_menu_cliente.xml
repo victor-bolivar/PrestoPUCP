@@ -13,8 +13,12 @@
         android:title="Solicitudes de préstamo"
         >
     </item>
-    <item android:id="@+id/nav_historial_prestamo"
-        android:title="Historial de préstamos"
+    <item android:id="@+id/nav_prestamo_aprobado"
+        android:title="préstamos aprobados"
+        >
+    </item>
+    <item android:id="@+id/nav_prestamo_rechazado"
+        android:title="préstamos rechazados"
         >
     </item>
 </menu>

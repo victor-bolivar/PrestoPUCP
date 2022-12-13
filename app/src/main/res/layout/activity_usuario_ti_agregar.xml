@@ -47,7 +47,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="48dp"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                 />
 
             <TextView
                 android:id="@+id/textView24"

@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.prestopucp.Constantes.Constante;
 import com.example.prestopucp.R;
 import com.example.prestopucp.dto.Dispositivo;
-import com.example.prestopucp.dto.ReservaDispositivo;
 import com.example.prestopucp.dto.SolicitudPendiente;
+import com.example.prestopucp.usuarioCliente.ReservaDispositivoActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,48 +26,42 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-public class AdapterHistorialPrestamos extends RecyclerView.Adapter<AdapterHistorialPrestamos.ReservaHistorialViewHolder> {
+import java.util.HashMap;
 
+public class AdapterSolicitudPrestamo  extends RecyclerView.Adapter<AdapterSolicitudPrestamo.SolicitudPrestamoViewHolder> {
 
-    private SolicitudPendiente[] listHistorialReservas;
+    private SolicitudPendiente[] listReservasDis;
     private Context context;
-
-    EditText tipo, estado,curso,fecha;
-    ImageView imageView;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-    public class ReservaHistorialViewHolder extends RecyclerView.ViewHolder {
-        SolicitudPendiente d;
-        public ReservaHistorialViewHolder(@NonNull View itemView){super(itemView);}
-    }
 
     @NonNull
     @Override
-    public ReservaHistorialViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterSolicitudPrestamo.SolicitudPrestamoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.list_historial_reserva,parent,false);
         mAuth = FirebaseAuth.getInstance();
         // initialize firebase database
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        return new ReservaHistorialViewHolder(view);
+        return new SolicitudPrestamoViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReservaHistorialViewHolder holder, int position) {
-        SolicitudPendiente historialDis = listHistorialReservas[position];
-        holder.d = historialDis;
+    public void onBindViewHolder(@NonNull AdapterSolicitudPrestamo.SolicitudPrestamoViewHolder holder, int position) {
+        SolicitudPendiente reservasDis = listReservasDis[position];
+        holder.d = reservasDis;
+
+
 
         ImageView photo = holder.itemView.findViewById(R.id.id_imagen_histRese);
         TextView textView_tipo = holder.itemView.findViewById(R.id.id_text_tipo_hr);
         TextView textView_curso = holder.itemView.findViewById(R.id.id_text_curso_hr);
         TextView textView_fecha = holder.itemView.findViewById(R.id.id_text_fecha_hr);
         TextView textView_marca = holder.itemView.findViewById(R.id.id_text_estado_hr);
-        Log.d("id disposi",historialDis.getDispositivoId());
+        Log.d("id disposi",reservasDis.getDispositivoId());
 
-
-
-        mDatabase.child(Constante.DB_DISPOSITIVOS).child(historialDis.getDispositivoId()).addValueEventListener(new ValueEventListener() {
+        mDatabase.child(Constante.DB_DISPOSITIVOS).child(reservasDis.getDispositivoId()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
@@ -95,43 +90,37 @@ public class AdapterHistorialPrestamos extends RecyclerView.Adapter<AdapterHisto
 
             }
         });
-
-        if (historialDis.getMotivoRechazo() != null){
-            textView_fecha.setText("Motivo : "+ historialDis.getMotivoRechazo());
-        }else{
-            textView_fecha.setText("Fecha Max : "+ historialDis.getTiempoReserva());
-        }
-        textView_curso.setText("Curso : " + historialDis.getCurso());
-
-
-
-        //colocar datos
-
-
-
-
+        textView_curso.setText("Curso : " + reservasDis.getCurso());
+        textView_fecha.setText("Fecha Max : "+ reservasDis.getTiempoReserva());
 
 
     }
 
     @Override
     public int getItemCount() {
-        return listHistorialReservas.length;
+        return listReservasDis.length;
     }
 
-    public SolicitudPendiente[] getListHistorialReservas() {
-        return listHistorialReservas;
+    public class SolicitudPrestamoViewHolder extends RecyclerView.ViewHolder {
+        SolicitudPendiente d;
+        public SolicitudPrestamoViewHolder(@NonNull View itemView) {
+            super(itemView);
+        }
     }
 
-    public void setListHistorialReservas(SolicitudPendiente[] listHistorialReservas) {
-        this.listHistorialReservas = listHistorialReservas;
+    public void setListReservasDis(SolicitudPendiente[] listReservasDis) {
+        this.listReservasDis = listReservasDis;
     }
 
-    public Context getContext() {
-        return context;
+    public SolicitudPendiente[] getListReservasDis() {
+        return listReservasDis;
     }
 
     public void setContext(Context context) {
         this.context = context;
+    }
+
+    public Context getContext() {
+        return context;
     }
 }

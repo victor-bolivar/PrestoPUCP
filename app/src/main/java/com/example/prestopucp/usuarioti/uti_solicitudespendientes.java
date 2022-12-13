@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.prestopucp.Constantes.Constante;
 import com.example.prestopucp.R;
 import com.example.prestopucp.dto.Dispositivo;
 import com.example.prestopucp.dto.SolicitudPendiente;
@@ -158,11 +159,19 @@ public class uti_solicitudespendientes extends Fragment {
                 } else{
                     // se pinta el primer elemento
                     solicitudActual = solicitudesPendientes.get(0);
-
+                    mDatabase.child(Constante.DB_USERS).child(solicitudActual.getNombre())
+                                    .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                    HashMap<String, Object> data = (HashMap<String, Object>) task.getResult().getValue();
+                                    String nombre = (String) data.get("nombre");
+                                    textView_nombre.setText(nombre);
+                                }
+                            });
                     textView_solicitudID.setText("Solicitud #"+ solicitudActual.getId());
-                    textView_nombre.setText(solicitudActual.getNombre());
+                  //  textView_nombre.setText(solicitudActual.getNombre());
                     textView_curso.setText(solicitudActual.getCurso());
-                    textView_motivo.setText(solicitudActual.getNombre());
+                    textView_motivo.setText(solicitudActual.getMotivo());
                     textView_tiempo.setText(solicitudActual.getTiempoReserva());
                     textView_programas.setText(solicitudActual.getProgramas());
                     textView_detalles.setText(solicitudActual.getDetalles());

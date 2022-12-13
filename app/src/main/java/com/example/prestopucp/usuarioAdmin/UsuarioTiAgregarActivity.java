@@ -86,8 +86,10 @@ public class UsuarioTiAgregarActivity extends AppCompatActivity {
 //        Log.d("msg useeer", usuarioTI.getLlave());
         btn_add_user = findViewById(R.id.admin_agregarUsuario_btnCrear);
         btn_add_imagenUser = findViewById(R.id.admin_agregarUsuario_btnImagen);
-
+        btn_add_imagenUser.setVisibility(View.GONE);
         if (usuarioTI == null){
+
+
             this.setTitle("Agregar Usuario TI");
             //botones
             btn_add_imagenUser.setOnClickListener(new View.OnClickListener() {
@@ -101,61 +103,62 @@ public class UsuarioTiAgregarActivity extends AppCompatActivity {
             btn_add_user.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    usuarioTI = new User();
+                    String correoEdi = editText_correo.getText().toString().trim();
+                    String nombreEdi = editText_nombre.getText().toString().trim();
+                    String codigoEdi = editText_codigo.getText().toString().trim();
+                    usuarioTI.setEmail(correoEdi);
+                    usuarioTI.setNombre(nombreEdi);
+                    usuarioTI.setCodigo(codigoEdi);
 
-                    Log.d("msg","url de imagen : " + imagenUrlUser);
-
-
-
-                    nombreUser = editText_nombre.getText().toString();
-                    usuarioTI.setNombre(nombreUser);
-
-                    codigoUser = editText_codigo.getText().toString();
-                    Log.d("msg codigo usuario",codigoUser);
-                    usuarioTI.setCodigo(codigoUser);
-
-                    correoUser = editText_correo.getText().toString();
-                    usuarioTI.setEmail(codigoUser);
-
-                    if (nombreUser.isEmpty() || codigoUser.isEmpty() || correoUser.isEmpty()){
+                    if (correoEdi.isEmpty() || nombreEdi.isEmpty() || codigoEdi.isEmpty()){
                         Toast.makeText(UsuarioTiAgregarActivity.this,"Por favor de ingresar sus datos",Toast.LENGTH_SHORT).show();
                     }else{
                         Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
                         String email = "info@programacionextrema.com";
-                        Matcher mather = pattern.matcher(correoUser);
+                        Matcher mather = pattern.matcher(correoEdi);
 
                         if (mather.find() == true) {
                             progressDialog.setMessage("Guardando Usuario");
 
                             Log.d("msg","Guardando al usuario con su url de imagen");
-                            String contra = "asdasd";
+                            String contra = "admin1";
 
-                            mAuth.createUserWithEmailAndPassword(correoUser,contra)
+                            mAuth.createUserWithEmailAndPassword(correoEdi,contra)
                                     .addOnCompleteListener(UsuarioTiAgregarActivity.this, new OnCompleteListener<AuthResult>() {
                                         @Override
                                         public void onComplete(@NonNull Task<AuthResult> task) {
                                             if (task.isSuccessful()){
-                                                task.getResult();
+                                                //task.getResult();
+                                                User usuarioTi = new User(nombreEdi,codigoEdi,correoEdi,"Alumno" +
+                                                        "","UsuarioTI","");
+                                                Log.d("msg useer", task.getResult().getUser().getUid() );
+                                                usuarioTi.setLlave( task.getResult().getUser().getUid());
+                                                FirebaseDatabase.getInstance().getReference("users")
+                                                        .child(usuarioTi.getLlave()).setValue(usuarioTi)
+                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                Log.d("msg","guardadro exitoso del usuario con urlimagen");
+                                                                Toast.makeText(UsuarioTiAgregarActivity.this, "Se guardo exitosamente",Toast.LENGTH_LONG );
+                                                                finish();
+                                                                return;
+                                                            }
+                                                        });
+                                                progressDialog.dismiss();
+                                            }else {
+                                                Toast.makeText(UsuarioTiAgregarActivity.this,"Ingresar un correo valido",Toast.LENGTH_SHORT).show();
+                                            }
+
                                                 //usuarioTI.setLlave();
                                             }
-                                        }
-                                    });
+                                        });
+                                    };
 
                             //nombre, String codigo, String email, String rol, String privilegio, String imagenUrl
-                            FirebaseDatabase.getInstance().getReference("users")
-                                    .push().setValue(new User(nombreUser,codigoUser,correoUser,"UsuarioTI","Alumno",imagenUrlUser))
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            Log.d("msg","guardadro exitoso del usuario con urlimagen");
-                                            Toast.makeText(UsuarioTiAgregarActivity.this, "Se guardo exitosamente",Toast.LENGTH_LONG );
-                                        }
-                                    });
-                            progressDialog.dismiss();
-                        }else {
-                            Toast.makeText(UsuarioTiAgregarActivity.this,"Ingresar un correo valido",Toast.LENGTH_SHORT).show();
-                        }
+
 
                     }
 

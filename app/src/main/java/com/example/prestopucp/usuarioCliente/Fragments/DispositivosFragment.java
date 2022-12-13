@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,9 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.prestopucp.Constantes.Constante;
 import com.example.prestopucp.Interface.iComunicaFragment;
 import com.example.prestopucp.R;
 import com.example.prestopucp.dto.Dispositivo;
+import com.example.prestopucp.dto.PendienteDto;
 import com.example.prestopucp.usuarioCliente.Adaptadores.AdapterDispositivos;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -31,13 +34,13 @@ import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 
-public class DispositivosFragment extends Fragment {
+public class DispositivosFragment extends Fragment implements SearchView.OnQueryTextListener {
 
 
     ArrayList<Dispositivo> listDispositivos;
 
     ///nuevos parametros
-
+    private SearchView searchDispositivo;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
@@ -67,6 +70,7 @@ public class DispositivosFragment extends Fragment {
 
         recyclerViewDispositivos = view.findViewById(R.id.recyclerViewDispositivos);
         listDispositivos = new ArrayList<>();
+        //searchDispositivo = view.findViewById(R.id.searchDispositivo);
 
         return view;
     }
@@ -84,7 +88,6 @@ public class DispositivosFragment extends Fragment {
                     for (DataSnapshot disSnap : snapshot.getChildren()){
                         if (disSnap.exists()){
                             Log.d("msg dispositivos",disSnap.getValue().toString());
-
                             Dispositivo dis = (Dispositivo) disSnap.getValue(Dispositivo.class);
                             Log.d("msg",dis.getTipo() + " " + dis.getMarca());
                             listDispositivos.add(dis);
@@ -113,6 +116,13 @@ public class DispositivosFragment extends Fragment {
     }
 
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
 
-
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
 }

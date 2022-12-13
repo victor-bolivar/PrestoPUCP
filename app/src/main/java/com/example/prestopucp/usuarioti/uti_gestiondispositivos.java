@@ -111,6 +111,7 @@ public class uti_gestiondispositivos extends Fragment {
                         }
                     }
 
+
                     // se convierte a java array pq asi lo requiere el adapter
                     Dispositivo[] listaDispositivos = new Dispositivo[ arraylistDispositivos.size() ];
                     arraylistDispositivos.toArray( listaDispositivos );

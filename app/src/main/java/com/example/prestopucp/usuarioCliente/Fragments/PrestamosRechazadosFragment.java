@@ -2,7 +2,6 @@ package com.example.prestopucp.usuarioCliente.Fragments;
 
 import android.os.Bundle;
 
-import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,10 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.prestopucp.Constantes.Constante;
 import com.example.prestopucp.R;
-import com.example.prestopucp.dto.Dispositivo;
-import com.example.prestopucp.dto.ReservaDispositivo;
 import com.example.prestopucp.dto.SolicitudPendiente;
 import com.example.prestopucp.usuarioCliente.Adaptadores.AdapterHistorialPrestamos;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,27 +22,29 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.checkerframework.checker.units.qual.A;
-
 import java.util.ArrayList;
 
 
-public class HistorialPrestamoFragment extends Fragment {
+public class PrestamosRechazadosFragment extends Fragment {
 
-    ArrayList<ReservaDispositivo> listReservaDis;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
-    RecyclerView recyclerViewHistorial;
+    RecyclerView recyclerViewRechazados;
 
-    public HistorialPrestamoFragment() {
-        super(R.layout.fragment_historial_prestamo);
+    public PrestamosRechazadosFragment() {
+        // Required empty public constructor
+    }
+
+
+    public static PrestamosRechazadosFragment newInstance(String param1, String param2) {
+        PrestamosRechazadosFragment fragment = new PrestamosRechazadosFragment();
+        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // initialize firebase auth
         mAuth = FirebaseAuth.getInstance();
         // initialize firebase database
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -55,10 +53,11 @@ public class HistorialPrestamoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_historial_prestamo, container, false);
-        recyclerViewHistorial = view.findViewById(R.id.recyclerViewHistorialPrestamos);
-        //listReservaDis = new ArrayList<>();
+        View view = inflater.inflate(R.layout.fragment_prestamos_rechazados, container, false);
+        recyclerViewRechazados = view.findViewById(R.id.recyclerViewRechazados);
+
         return view;
+        // Inflate the layout for this fragment
     }
 
     @Override
@@ -67,7 +66,7 @@ public class HistorialPrestamoFragment extends Fragment {
 
         String idUser = mAuth.getCurrentUser().getUid();
         //solicitudes aprobadas
-        mDatabase.child("solicitudesAprobadas").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("solicitudesRechazadas").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
@@ -102,6 +101,9 @@ public class HistorialPrestamoFragment extends Fragment {
                                 String motivo= reservaSnap.child("motivo").getValue().toString();
                                 soliPendiente.setMotivo(motivo);
 
+                                String motivoRechazo= reservaSnap.child("motivoRechazo").getValue().toString();
+                                soliPendiente.setMotivoRechazo(motivoRechazo);
+
                                 String nombre= reservaSnap.child("nombre").getValue().toString();
                                 soliPendiente.setNombre(nombre);
 
@@ -126,8 +128,8 @@ public class HistorialPrestamoFragment extends Fragment {
                     adapterHistorialPrestamos.setListHistorialReservas(arrayHistoAprobados);
                     adapterHistorialPrestamos.setContext(getActivity());
 
-                    recyclerViewHistorial.setAdapter(adapterHistorialPrestamos);
-                    recyclerViewHistorial.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    recyclerViewRechazados.setAdapter(adapterHistorialPrestamos);
+                    recyclerViewRechazados.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
 
@@ -146,4 +148,5 @@ public class HistorialPrestamoFragment extends Fragment {
         });
 
     }
+
 }

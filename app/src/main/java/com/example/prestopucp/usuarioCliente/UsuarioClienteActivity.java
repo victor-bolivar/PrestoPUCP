@@ -17,6 +17,7 @@ import com.example.prestopucp.R;
 
 import com.example.prestopucp.usuarioCliente.Fragments.DispositivosFragment;
 import com.example.prestopucp.usuarioCliente.Fragments.HistorialPrestamoFragment;
+import com.example.prestopucp.usuarioCliente.Fragments.PrestamosRechazadosFragment;
 import com.example.prestopucp.usuarioCliente.Fragments.SolicitudPrestamoFragment;
 
 import com.example.prestopucp.usuarioti.uti_micuenta;
@@ -68,9 +69,13 @@ public class UsuarioClienteActivity extends AppCompatActivity {
                         fragment = new SolicitudPrestamoFragment();
                         titulo  = "Solicitudes de prestamo";
                         break;
-                    case R.id.nav_historial_prestamo:
+                    case R.id.nav_prestamo_aprobado:
                         fragment = new HistorialPrestamoFragment();
-                        titulo  = "Historial de prestamo";
+                        titulo  = "Prestamos Aprobados";
+                        break;
+                        case R.id.nav_prestamo_rechazado:
+                        fragment = new PrestamosRechazadosFragment();
+                        titulo  = "Prestamos Rechazados";
                         break;
                 }
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

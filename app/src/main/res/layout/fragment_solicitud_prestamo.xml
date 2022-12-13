@@ -5,11 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".usuarioCliente.Fragments.SolicitudPrestamoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cli_ReservaDis_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="fragmento de solicitud de prestamo" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

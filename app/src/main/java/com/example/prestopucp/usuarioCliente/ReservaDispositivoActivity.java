@@ -1,5 +1,6 @@
 package com.example.prestopucp.usuarioCliente;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,17 +20,28 @@ import android.widget.Toast;
 import com.example.prestopucp.Constantes.Constante;
 import com.example.prestopucp.R;
 import com.example.prestopucp.dto.Dispositivo;
+import com.example.prestopucp.dto.PendienteDto;
 import com.example.prestopucp.dto.ReservaDispositivo;
 import com.example.prestopucp.dto.SolicitudPendiente;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 
 public class ReservaDispositivoActivity extends AppCompatActivity {
 
@@ -68,19 +80,35 @@ public class ReservaDispositivoActivity extends AppCompatActivity {
         dispositivoCli.setText(dispositivo.getTipo() + " " + dispositivo.getMarca());
 
         fotoDispositivoCli = findViewById(R.id.ucliente_solicitudes_imageView_Dispositivo);
+        mDatabase.child(Constante.DB_DISPOSITIVOS).child(dispositivo.getKey()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if  (snapshot.exists()){
+                    Dispositivo dispositivo = snapshot.getValue(Dispositivo.class);
 
-        String urlImagen = dispositivo.getImagenes().get(0);
-        Log.d("msg",urlImagen);
-        if (urlImagen.equals("")){
-            fotoDispositivoCli.setBackgroundResource(R.drawable.imagen_ejemplo_dispositivo);
-            Log.d("msg", "imagen predefinida dispositivo");
-        } else {
-            // se coloca la imagen con Picasso
-            Picasso.with(ReservaDispositivoActivity.this)
-                    .load(urlImagen)
-                    .resize(120, 120)
-                    .into(fotoDispositivoCli);
-        }
+                    String urlImagen = dispositivo.getImagenes().get(0);
+
+                    if (urlImagen.equals("")){
+                        fotoDispositivoCli.setBackgroundResource(R.drawable.imagen_ejemplo_dispositivo);
+                        Log.d("msg", "imagen predefinida dispositivo");
+                    } else {
+                        // se coloca la imagen con Picasso
+                        Picasso.with(ReservaDispositivoActivity.this)
+                                .load(urlImagen)
+                                .resize(120, 120)
+                                .into(fotoDispositivoCli);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        //String urlImagen = dispositivo.getImagenes().get(0);
+
 
         //ucliente_solicitudes_imageView_dni
 
@@ -93,10 +121,14 @@ public class ReservaDispositivoActivity extends AppCompatActivity {
         otrosCli = findViewById(R.id.ucliente_solicitudes_otros);
 
 
+
+
         //add_user = findViewById(R.id.ucliente_solicitudes_imageView_dni);
 
 
         ImageView dniView = findViewById(R.id.ucliente_solicitudes_imageView_dni);
+
+        /**
         dniView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +136,7 @@ public class ReservaDispositivoActivity extends AppCompatActivity {
                 intent1.setType("image/*");
                 startActivityForResult(intent1,200);
             }
-        });
+        });*/
 
         //Log.d("msg dni url aaa", dniUrl.toString().trim());
 
@@ -114,17 +146,65 @@ public class ReservaDispositivoActivity extends AppCompatActivity {
 
                 String curso = cursoCli.getText().toString().trim();
                 String motivo = motivoCli.getText().toString().trim();
-                String dias = motivoCli.getText().toString().trim();
-                String programas = motivoCli.getText().toString().trim();
-                String otros = motivoCli.getText().toString().trim();
+                String dias = diasCli.getText().toString().trim();
+                String programas = programasCli.getText().toString().trim();
+                String otros = otrosCli.getText().toString().trim();
+
+                if (curso.isEmpty() || motivo.isEmpty() || dias.isEmpty() || programas.isEmpty() ){
+                    Toast.makeText(ReservaDispositivoActivity.this, "Los campos son obligatorios", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (dniView.getDrawable()==null){
+                    Toast.makeText(ReservaDispositivoActivity.this, "Debe de ingresar imagen en el perfil de usuario", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+
+
+                mDatabase.child(Constante.DB_SOLICITUDES_PENDIENTES).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot prestado : snapshot.getChildren()){
+                            PendienteDto pd = (PendienteDto) prestado.getValue(PendienteDto.class);
+                            if (dispositivo.getKey().equals(pd.getDispositivoId())){
+                                //Toast.makeText(ReservaDispositivoActivity.this, "Usted ya ha reservado este equipo", Toast.LENGTH_LONG).show();
+                                break;
+
+                            }
+                        }
+                        return;
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                int diasInt = Integer.valueOf(dias);
+                String fechaMax="";
+                if (diasInt<0 || diasInt>31){
+                    Toast.makeText(ReservaDispositivoActivity.this, "días máximo de reservacion : 30 días", Toast.LENGTH_LONG).show();
+                    return;
+                }else{
+                    Calendar fecha = Calendar.getInstance();
+                    int año = fecha.get(Calendar.YEAR);
+                    int mes = fecha.get(Calendar.MONTH) + 1;
+                    int dia = fecha.get(Calendar.DAY_OF_MONTH) + diasInt;
+
+                    fechaMax = dia + "/"+mes+"/"+año;
+                }
 
                 String keyReserva =  FirebaseDatabase.getInstance()
                         .getReference()
                         .child(Constante.DB_SOLICITUDES_PENDIENTES).push().getKey();
 
 
-                solicitudPendiente = new SolicitudPendiente(curso,otros,dispositivo.getKey(),mAuth.getCurrentUser().getUid()
-                ,motivo,"nombre no se",programas,"rol usuario",dias,keyReserva,mAuth.getCurrentUser().getEmail());
+
+                solicitudPendiente = new SolicitudPendiente(curso,otros,dispositivo.getKey(),"imagen prueba"
+                        ,motivo,mAuth.getCurrentUser().getUid(),programas,"UsuarioTI",fechaMax,keyReserva,mAuth.getCurrentUser().getEmail());
 
                 FirebaseDatabase.getInstance()
                         .getReference()
