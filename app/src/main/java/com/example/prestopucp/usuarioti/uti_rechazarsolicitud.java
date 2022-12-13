@@ -1,7 +1,9 @@
 package com.example.prestopucp.usuarioti;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +31,23 @@ public class uti_rechazarsolicitud extends AppCompatActivity {
         // se obtiene el motivo
         EditText editText = findViewById(R.id.uti_rechazarsolicitud_editTextTextMultiLine);
         String text = editText.getText().toString();
+
+        if (text.equals("")){
+            // alert dialog
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("Ingrese un motivo.");
+            builder1.setCancelable(true);
+
+            builder1.setPositiveButton(
+                    "Cancelar",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }
 
         // se regresa
         intent.putExtra("motivo", text);

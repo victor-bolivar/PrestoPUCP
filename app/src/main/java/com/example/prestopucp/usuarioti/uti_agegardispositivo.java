@@ -134,6 +134,7 @@ public class uti_agegardispositivo extends AppCompatActivity {
                     return;
                 }
 
+
                 Spinner spinnnerTipo = findViewById(R.id.uti_agregardispsitivo_spinnertipo);
                 EditText editText_especificarTipo = findViewById(R.id.uti_agregardispositivo_especificartipo);
                 String tipo = spinnnerTipo.getSelectedItem().toString();
@@ -151,8 +152,38 @@ public class uti_agegardispositivo extends AppCompatActivity {
                 String incluye = editText_incluye.getText().toString();
 
                 EditText editText_stock = findViewById(R.id.uti_agregardispositivo_stock);
-                int stock = Integer.parseInt(editText_stock.getText().toString());
+                String stockString = editText_stock.getText().toString();
+                int stock;
+                if (stockString.equals("") || !isInteger(stockString)){
+                    stock = -1;
+                } else {
+                    stock = Integer.parseInt(stockString);
+                }
 
+                // validacion campos  vacios
+                if (tipo.equals("") ||
+                    marca.equals("") ||
+                    caracteristicas.equals("") ||
+                    incluye.equals("") ||
+                    stock<0){
+
+                    // alert dialog
+                    AlertDialog.Builder builder2 = new AlertDialog.Builder(uti_agegardispositivo.this);
+                    builder2.setMessage("Por favor, ingrese valores validos.");
+                    builder2.setCancelable(true);
+
+                    builder2.setPositiveButton(
+                            "Cancelar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert12 = builder2.create();
+                    alert12.show();
+                    return;
+
+                }
 
                 // 1. guardado de imagenes
                 progressDialog.show();
@@ -246,5 +277,17 @@ public class uti_agegardispositivo extends AppCompatActivity {
         );
 
         return px;
+    }
+
+    public static boolean isInteger(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            int d = Integer.parseInt(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 }

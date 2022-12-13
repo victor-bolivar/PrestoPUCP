@@ -54,12 +54,28 @@ public class Inicio extends AppCompatActivity {
         // initialize firebase database
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        vaidarLogin(); // se coloca aca para que no se demore hasta llegar a onResume() para validar el login
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
+        vaidarLogin(); // se colca en onResume porsi el usuario, una vez logueado, presiona el boton de retroceder
+    }
+
+    public void irRegistro(View view){
+        Intent intent = new Intent(this, Register.class);
+        startActivity( intent );
+    }
+
+    public void irLogin(View view){
+        Intent intent = new Intent(this, Login.class);
+        startActivity( intent );
+    }
+
+    public void vaidarLogin(){
         // SE VERIFICA QUE SI ESTA LOGUEADO -> actividad solicitudes pendientes
         if (mAuth.getCurrentUser() != null){
             FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -107,48 +123,6 @@ public class Inicio extends AppCompatActivity {
 
         }
     }
-
-    public void irRegistro(View view){
-        Intent intent = new Intent(this, Register.class);
-        startActivity( intent );
-    }
-
-    public void irLogin(View view){
-        Intent intent = new Intent(this, Login.class);
-        startActivity( intent );
-    }
-
-
-//    public void onClickIniciarSesion(View view){
-//        Intent signInIntent = AuthUI.getInstance()
-//                .createSignInIntentBuilder()
-//                .setAvailableProviders(Arrays.asList(
-//                        new AuthUI.IdpConfig.EmailBuilder().build()
-//                ))
-//                .setLogo(R.drawable.logo_prestopucp)      // Set logo drawable
-//                .setTheme(R.style.Theme_PrestoPUCP)      // Set theme
-//                .setIsSmartLockEnabled(false)
-//
-//                .build();
-//        signInLauncher.launch(signInIntent);
-//    }
-//
-//    // Firebase UI (para inicio de sesion)
-//    private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
-//            new FirebaseAuthUIActivityResultContract(), result -> {
-//               onSignInResult(result);
-//            }
-//
-//    );
-//    private void onSignInResult(FirebaseAuthUIAuthenticationResult result){
-//        IdpResponse response = result.getIdpResponse();
-//        if (result.getResultCode() == RESULT_OK){
-//            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//            Log.d("msg", "Firebase uid: "+user.getUid()); // TODO usar el UID para identificar a los usuarios admin, usuario TI y mandarlos a distintos flujos
-//        } else {
-//            Log.d("msg", "Se cancelo log in");
-//        }
-//    }
 
 
 }

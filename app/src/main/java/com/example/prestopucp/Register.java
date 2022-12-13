@@ -38,7 +38,6 @@ public class Register extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         // SE VERIFICA QUE SI ESTA LOGUEADO, SE CIERRA ESTA ACTIVIDAD
-        // TODO
         if (mAuth.getCurrentUser() != null){
 
             Log.d("msg / usuario logeado", mAuth.getCurrentUser().getEmail());
@@ -68,6 +67,12 @@ public class Register extends AppCompatActivity {
                 password.isEmpty() ||
                 rol.isEmpty() ) {
             Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // se verifica que el codigo sea de 8 digitos alfanumerico
+        if (    !isAlphaNumeric(codigo) || (codigo.length() != 8) ) {
+            Toast.makeText(this, "Ingrese un código válido", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -109,6 +114,11 @@ public class Register extends AppCompatActivity {
                 });
 
 
+    }
+
+
+    public static boolean isAlphaNumeric(String s) {
+        return s != null && s.matches("^[a-zA-Z0-9]*$");
     }
 
 

@@ -20,12 +20,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/uti_navdrawer_nombreusuario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="56dp"
-        android:text="Hernan Barcos"
+        android:text=""
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold|italic"
